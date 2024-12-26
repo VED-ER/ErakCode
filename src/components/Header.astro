@@ -1,0 +1,128 @@
+---
+import { Image } from "astro:assets"
+import logoWhite from "@assets/logo-white.png"
+import x from "@assets/x.svg"
+import hamburger from "@assets/hamburger.svg"
+import Button from "./Button.astro"
+
+const navLinks = [
+    {
+        name: "About Us",
+        path: "#about-us",
+    },
+    {
+        name: "Services",
+        path: "#services",
+    },
+    {
+        name: "Portfolio",
+        path: "#portfolio",
+    },
+    {
+        name: "Team",
+        path: "#team",
+    },
+]
+---
+
+<header class="max-w-screen-2xl mx-auto px-2.5 sm:px-5">
+    <nav
+        class="mt-6 w-full flex items-center justify-between py-3 max-w-[1260px] mx-auto rounded-full bg-[#111111]"
+    >
+        <Image
+            src={logoWhite}
+            alt={"Logo"}
+            class={"w-40 sm:w-auto  ml-4 sm:ml-8"}
+        />
+        <ul class="hidden lg:flex gap-x-11">
+            {
+                navLinks.map((link) => {
+                    // TODO: figure out which link is active based on scroll position
+                    const isActive = link.name === "About Us"
+                    return (
+                        <li>
+                            <a
+                                href={link.path}
+                                class={`text-[#747785] text-sm ${isActive ? "text-white" : ""}`}
+                            >
+                                {link.name}
+                            </a>
+                        </li>
+                    )
+                })
+            }
+        </ul>
+        <Button
+            text="Get a Quote"
+            className="px-9 py-3 mr-[18px] hidden lg:block"
+        />
+        <!-- Mobile -->
+        <div
+            id="hamburger-button"
+            class="lg:hidden p-2 mr-[18px]"
+            role="button"
+            aria-label="Toggle Menu"
+            aria-expanded="false"
+        >
+            <Image src={hamburger} class={"w-5 h-5"} alt={"hamburger"} />
+        </div>
+
+        <div
+            id="hamburger-menu"
+            class="w-screen h-screen bg-[#0A0C10] fixed z-10 top-0 right-0 flex flex-col transform translate-x-full transition-transform duration-300 ease-in-out"
+        >
+            <div class="flex justify-end p-7">
+                <div
+                    id="hamburger-close-menu"
+                    role="button"
+                    aria-label="Close Menu"
+                >
+                    <Image src={x} class={"w-5 h-5"} alt={"close"} />
+                </div>
+            </div>
+            <div
+                id="mobile-menu-links"
+                class="flex flex-col h-full h-f gap-y-16 justify-center items-center"
+            >
+                {
+                    navLinks.map((link) => {
+                        return (
+                            <a
+                                href={link.path}
+                                class="text-white text-base p-2"
+                            >
+                                {link.name}
+                            </a>
+                        )
+                    })
+                }
+                <Button text="Get a Quote" className="py-5 px-10" />
+            </div>
+        </div>
+    </nav>
+</header>
+
+<script>
+    const hamburgerButton = document.querySelector("#hamburger-button")
+    const mobileMenu = document.querySelector("#hamburger-menu")
+    const closeMenuBtn = document.querySelector("#hamburger-close-menu")
+    const mobileMenuLinks = document.querySelector("#mobile-menu-links")
+
+    hamburgerButton?.addEventListener("click", () => {
+        hamburgerButton.setAttribute("aria-expanded", "true")
+        mobileMenu?.classList.replace("translate-x-full", "translate-x-0")
+    })
+
+    closeMenuBtn?.addEventListener("click", () => {
+        hamburgerButton?.setAttribute("aria-expanded", "false")
+        mobileMenu?.classList.replace("translate-x-0", "translate-x-full")
+    })
+
+    mobileMenuLinks?.addEventListener("click", (e) => {
+        const target = e.target as HTMLElement
+        if (target.tagName === "A") {
+            hamburgerButton?.setAttribute("aria-expanded", "false")
+            mobileMenu?.classList.replace("translate-x-0", "translate-x-full")
+        }
+    })
+</script>

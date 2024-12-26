@@ -13,6 +13,9 @@ export default {
                 primary: "#0000EC",
                 background: "#000102",
             },
+            screens: {
+                "2xl": "1440px",
+            },
         },
     },
     plugins: [],
