@@ -16,6 +16,9 @@ export default {
             screens: {
                 "2xl": "1440px",
             },
+            backgroundImage: {
+                hero: "url('./src/assets/hero.png')",
+            },
         },
     },
     plugins: [],

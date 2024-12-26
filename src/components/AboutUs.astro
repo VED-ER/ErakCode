@@ -1,0 +1,62 @@
+---
+import { Image } from "astro:assets"
+import Button from "./Button.astro"
+import arrowTopRight from "@assets/arrow-top-right.svg"
+---
+
+<section
+    id="about-us"
+    class="bg-hero mt-[58px] pt-[112px] bg-no-repeat bg-cover max-lg:bg-[right_-150px_bottom] lg:bg-[bottom_200px]"
+>
+    <div class="max-w-[1260px] mx-auto px-4 sm:px-8">
+        <div class="">
+            <h1
+                class="font-neuropolitcal text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[110px] text-white leading-[48px] sm:leading-[60px] md:leading-[72px] lg:leading-[96px] xl:leading-[110px]"
+            >
+                One Pixel at<br /> a Time
+            </h1>
+            <div class="mt-9 flex items-center">
+                <Button />
+                <a
+                    href="#"
+                    class="font-neuropolitcal text-sm text-white pl-2 sm:px-[38px] py-4 sm:py-[14px] flex items-center gap-x-3.5"
+                    >View Our Portfolio <span class="border p-3 rounded-full"
+                        ><Image src={arrowTopRight} alt={"link-arrow"} /></span
+                    ></a
+                >
+            </div>
+        </div>
+        <div class="mt-28 md:mt-40 lg:mt-50 xl:mt-[339px] max-w-[356px]">
+            <p class="text-white text-lg md:text-[20px] leading-9">
+                Your one-stop agency for creative solutions, cutting-edge apps,
+                and impactful branding.
+            </p>
+        </div>
+    </div>
+    <div class="mt-44 py-10 sm:py-14 md:py-[70px] backdrop-blur-xl">
+        <div
+            class="max-w-[1260px] mx-auto px-4 sm:px-8 flex max-md:flex-col items-center"
+        >
+            <div class="sm:basis-1/2 md:basis-2/5 max-sm:mb-3 max-md:mb-5">
+                <h2
+                    class="text-white font-neuropolitcal text-4xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[64px] leading-[76px]"
+                >
+                    Who We Are?
+                </h2>
+            </div>
+            <div
+                class="sm:basis-1/2 md:basis-3/5 md:px-4 md:border-l border-l-[#1A1C28]"
+            >
+                <p
+                    class="text-white text-base max-w-[564px] mx-auto leading-7 max-md:text-center"
+                >
+                    At erakcode, we are a passionate team of designers,
+                    developers, and strategists dedicated to transforming ideas
+                    into reality. With expertise in web design, app development,
+                    branding, and more, we create solutions that elevate brands
+                    and captivate audiences.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>

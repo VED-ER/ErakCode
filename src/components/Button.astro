@@ -1,9 +1,9 @@
 ---
-const { text, href = "#", className } = Astro.props
+const { text = "Get a Quote", href = "#", className } = Astro.props
 ---
 
 <a
-    class={`inline-block px-6 py-2 bg-primary text-white text-sm font-neuropolitcal rounded-full shadow-md hover:bg-opacity-50 focus:outline-none focus:ring-2 focus:ring-white transition ${className}`}
+    class={`inline-block px-5 sm:px-[38px] py-4 sm:py-5 bg-primary text-white text-sm font-neuropolitcal rounded-full shadow-md hover:bg-opacity-50 focus:outline-none focus:ring-2 focus:ring-white transition ${className}`}
     href={href}
 >
     {text}
