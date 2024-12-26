@@ -1,7 +1,7 @@
 ---
-import { Image } from "astro:assets"
 import Button from "./Button.astro"
-import arrowTopRight from "@assets/arrow-top-right.svg"
+import SectionHeading from "./SectionHeading.astro"
+import ArrowTopRight from "./icons/ArrowTopRight.astro"
 ---
 
 <section
@@ -21,7 +21,7 @@ import arrowTopRight from "@assets/arrow-top-right.svg"
                     href="#"
                     class="font-neuropolitcal text-sm text-white pl-2 sm:px-[38px] py-4 sm:py-[14px] flex items-center gap-x-3.5"
                     >View Our Portfolio <span class="border p-3 rounded-full"
-                        ><Image src={arrowTopRight} alt={"link-arrow"} /></span
+                        ><ArrowTopRight size="13" /></span
                     ></a
                 >
             </div>
@@ -38,11 +38,7 @@ import arrowTopRight from "@assets/arrow-top-right.svg"
             class="max-w-[1260px] mx-auto px-4 sm:px-8 flex max-md:flex-col items-center"
         >
             <div class="sm:basis-1/2 md:basis-2/5 max-sm:mb-3 max-md:mb-5">
-                <h2
-                    class="text-white font-neuropolitcal text-4xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[64px] leading-[76px]"
-                >
-                    Who We Are?
-                </h2>
+                <SectionHeading title="Who We Are?" />
             </div>
             <div
                 class="sm:basis-1/2 md:basis-3/5 md:px-4 md:border-l border-l-[#1A1C28]"
