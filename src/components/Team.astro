@@ -1,0 +1,50 @@
+---
+import SectionHeading from "./SectionHeading.astro"
+import { Image } from "astro:assets"
+import team1 from "@assets/team1.png"
+
+const TEAM = [
+    {
+        name: "Vedran Erak",
+        title: "Founder & Fullstack Developer",
+        img: team1,
+    },
+    {
+        name: "Sergej Sovilj",
+        title: "UI & UX Designer",
+        img: team1,
+    },
+    {
+        name: "Vedran Erak",
+        title: "Founder & Fullstack Developer",
+        img: team1,
+    },
+]
+---
+
+<section id="team">
+    <div class="text-center my-20">
+        <SectionHeading title="Our Team" />
+    </div>
+    <div
+        class="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-[1166px] px-4 sm:px-8 mx-auto"
+    >
+        {
+            TEAM.map((t, index) => (
+                <div
+                    class={`flex self-start items-center max-w-sm mx-auto flex-col bg-gradient-to-b from-[#BBC6FF1A] to-[#BBC6FF00] from-0% to-100% rounded-full overflow-hidden text-center group hover:bg-[#E1E1E1] transition duration-300 group-hover:bg-none ${index === 1 ? "sm:mt-[120px]" : ""}`}
+                >
+                    <div class="mt-20 px-2">
+                        <h5 class="text-xl md:text-2xl lg:text-[26px] text-white group-hover:text-[#000102] font-neuropolitcal">
+                            {t.name}
+                        </h5>
+                        <h6 class="text-base text-[#E1E1E1] group-hover:text-[#000102]">
+                            {t.title}
+                        </h6>
+                    </div>
+                    <Image src={t.img} alt={"team"} class="-mt-5" />
+                </div>
+            ))
+        }
+    </div>
+</section>
