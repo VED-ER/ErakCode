@@ -1,0 +1,134 @@
+---
+import ArrowLeft from "@components/icons/ArrowLeft.astro"
+import ArrowRight from "@components/icons/ArrowRight.astro"
+import { Image } from "astro:assets"
+import portfolio1 from "@assets/portfolio-1.png"
+import portfolio2 from "@assets/portfolio-2.png"
+import portfolio3 from "@assets/portfolio-3.png"
+const PORTFOLIO = [
+    {
+        title: "Logo design",
+        subtitle: "Din Ventures",
+        img: portfolio1,
+    },
+    {
+        title: "Logo design",
+        subtitle: "Inner Balance Watch",
+        img: portfolio2,
+    },
+    {
+        title: "Logo design",
+        subtitle: "STAYUPHIGHWAY",
+        img: portfolio3,
+    },
+]
+---
+
+<section id="portfolio" class="mt-[132px]">
+    <div class="grid grid-cols-1 lg:grid-cols-2">
+        <div class="bg-[#D0D2DE] lg:my-8 flex">
+            <div
+                class="max-w-[553px] py-10 sm:py-[60px] md:py-[80px] lg:py-[100px] flex flex-col my-auto w-full pl-4 ml-auto"
+            >
+                <h2
+                    class="text-[#000102] font-neuropolitcal text-5xl sm:text-6xl md:text-7xl lg:text-[84px] leading-[48px] sm:leading-[60px] md:leading-[72px] lg:leading-[84px]"
+                >
+                    Portfolio
+                </h2>
+                <div
+                    class="mt-4 sm:mt-7 md:mt-8 lg:mt-[38px] bg-[#000102] pt-10 lg:pt-[70px] pl-10 lg:pl-[70px] pb-10 lg:pb-[50px] rounded-tl-[40px] rounded-bl-[40px]"
+                >
+                    <div class="mb-[73px]">
+                        <h3
+                            id="portfolio-title-txt"
+                            class="text-white font-neuropolitcal text-[32px] transition-all duration-300 ease-in-out"
+                        >
+                            {PORTFOLIO[0].title}
+                        </h3>
+                        <h6
+                            id="portfolio-subtitle-txt"
+                            class="text-white text-base transition-all duration-300 ease-in-out"
+                        >
+                            {PORTFOLIO[0].subtitle}
+                        </h6>
+                    </div>
+                    <div class="flex gap-x-4">
+                        <div
+                            id="prev-portfolio-btn"
+                            role="button"
+                            class="text-white hover:text-black hover:bg-white transition bg-transparent border border-white rounded-full p-5"
+                        >
+                            <ArrowLeft />
+                        </div>
+                        <div
+                            id="next-portfolio-btn"
+                            role="button"
+                            class="text-white hover:text-black hover:bg-white transition bg-transparent border border-white rounded-full p-5"
+                        >
+                            <ArrowRight />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            {
+                PORTFOLIO.map((p, index) => (
+                    <Image
+                        src={p.img}
+                        data-carousel-item
+                        alt={"portfolio 1"}
+                        class={`${index !== 0 ? "hidden opacity-0" : "block"} object-cover w-full h-full object-left transition-all duration-300 ease-in-out`}
+                    />
+                ))
+            }
+        </div>
+    </div>
+</section>
+
+<script is:inline define:vars={{ PORTFOLIO }}>
+    let currentIndex = 0
+
+    const carouselItems = document.querySelectorAll("[data-carousel-item]")
+    const titleTxt = document.getElementById("portfolio-title-txt")
+    const subtitleTxt = document.getElementById("portfolio-subtitle-txt")
+    const nextButton = document.getElementById("next-portfolio-btn")
+    const prevButton = document.getElementById("prev-portfolio-btn")
+
+    function updateContent(newIndex) {
+        carouselItems[currentIndex].classList.add("opacity-0")
+
+        titleTxt.classList.add("opacity-0")
+        subtitleTxt.classList.add("opacity-0")
+
+        setTimeout(() => {
+            carouselItems[currentIndex].classList.remove("block")
+            carouselItems[currentIndex].classList.add("hidden")
+
+            currentIndex = newIndex
+
+            carouselItems[currentIndex].classList.remove("hidden")
+            carouselItems[currentIndex].classList.add("block")
+
+            titleTxt.textContent = PORTFOLIO[currentIndex].title
+            subtitleTxt.textContent = PORTFOLIO[currentIndex].subtitle
+
+            setTimeout(() => {
+                carouselItems[currentIndex].classList.remove("opacity-0")
+                titleTxt.classList.remove("opacity-0")
+                subtitleTxt.classList.remove("opacity-0")
+            }, 50)
+        }, 300)
+    }
+
+    nextButton.addEventListener("click", () => {
+        const newIndex = (currentIndex + 1) % PORTFOLIO.length
+        updateContent(newIndex)
+    })
+
+    prevButton.addEventListener("click", () => {
+        const newIndex =
+            (currentIndex - 1 + PORTFOLIO.length) % PORTFOLIO.length
+        updateContent(newIndex)
+    })
+</script>
