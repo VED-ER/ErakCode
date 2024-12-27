@@ -6,6 +6,26 @@ import AboutUs from "@components/AboutUs.astro"
 import Services from "@components/Services.astro"
 import Portfolio from "@components/Portfolio.astro"
 import Team from "@components/Team.astro"
+import Footer from "@components/Footer.astro"
+
+const navLinks = [
+    {
+        name: "About Us",
+        path: "#about-us",
+    },
+    {
+        name: "Services",
+        path: "#services",
+    },
+    {
+        name: "Portfolio",
+        path: "#portfolio",
+    },
+    {
+        name: "Team",
+        path: "#team",
+    },
+]
 ---
 
 <html lang="en" class="bg-background">
@@ -17,13 +37,12 @@ import Team from "@components/Team.astro"
         <title>ErakCode</title>
     </head>
     <body>
-        <Header />
+        <Header navLinks={navLinks} />
         <AboutUs />
         <Services />
         <Portfolio />
         <Team />
-        <div class="mb-96"></div>
-        <!-- <Footer /> -->
+        <Footer navLinks={navLinks} />
         <!-- <script>
 import "../scripts/menu.js";
 </script> -->

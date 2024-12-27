@@ -5,24 +5,7 @@ import x from "@assets/x.svg"
 import hamburger from "@assets/hamburger.svg"
 import Button from "./Button.astro"
 
-const navLinks = [
-    {
-        name: "About Us",
-        path: "#about-us",
-    },
-    {
-        name: "Services",
-        path: "#services",
-    },
-    {
-        name: "Portfolio",
-        path: "#portfolio",
-    },
-    {
-        name: "Team",
-        path: "#team",
-    },
-]
+const { navLinks } = Astro.props
 ---
 
 <header
@@ -38,7 +21,7 @@ const navLinks = [
         />
         <ul class="hidden lg:flex gap-x-11">
             {
-                navLinks.map((link) => {
+                navLinks.map((link: any) => {
                     // TODO: figure out which link is active based on scroll position
                     const isActive = link.name === "About Us"
                     return (
@@ -84,7 +67,7 @@ const navLinks = [
                 class="flex flex-col h-full h-f gap-y-16 justify-center items-center"
             >
                 {
-                    navLinks.map((link) => {
+                    navLinks.map((link: any) => {
                         return (
                             <a
                                 href={link.path}

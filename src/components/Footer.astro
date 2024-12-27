@@ -1,0 +1,106 @@
+---
+import { Image } from "astro:assets"
+import TwitterIcon from "./icons/TwitterIcon.astro"
+import logoWhite from "@assets/logo-white.png"
+import InstagramIcon from "./icons/InstagramIcon.astro"
+import LinkedInIcon from "./icons/LinkedInIcon.astro"
+import YoutubeIcon from "./icons/YoutubeIcon.astro"
+import FacebookIcon from "./icons/FacebookIcon.astro"
+
+const { navLinks } = Astro.props
+
+const socialIcons = [
+    {
+        alt: "Twitter (x) social",
+        Icon: TwitterIcon,
+        link: "#",
+    },
+    {
+        alt: "Instagram social",
+        Icon: InstagramIcon,
+        link: "#",
+    },
+    {
+        alt: "LinkedIn Social",
+        Icon: LinkedInIcon,
+        link: "#",
+    },
+    {
+        alt: "Youtube social",
+        Icon: YoutubeIcon,
+        link: "#",
+    },
+    {
+        alt: "Facebook social",
+        Icon: FacebookIcon,
+        link: "#",
+    },
+]
+---
+
+<section id="footer">
+    <div class="py-14 border-y-[1px] border-y-[#1A1C28] text-center">
+        <span
+            class="text-2xl xs:text-3xl sm:text-[44px] md:text-[54px] lg:text-[74px] xl:text-[84px] 2xl:text-[94px] text-white font-neuropolitcal"
+            >erakcode@gmail.com</span
+        >
+    </div>
+    <div class="flex max-md:flex-col justify-center">
+        <div class="md:w-[40%] 2xl:w-[45%] pl-4 lg:pl-8">
+            <div
+                class="flex pt-8 md:pt-16 flex-col md:mb-16 md:max-w-[445px] pr-4 lg:pr-8 xl:pr-20 md:ml-auto"
+            >
+                <Image src={logoWhite} alt={"logo"} />
+                <p class="text-base text-[#747785] mt-7 mb-5 md:mb-11">
+                    Your one-stop agency for creative solutions, cutting-edge
+                    apps, and impactful branding.
+                </p>
+                <p class="text-white text-base max-md:hidden">
+                    © {new Date().getFullYear().toString()} ErakCode™. All rights
+                    reserved.
+                </p>
+            </div>
+        </div>
+        <div class="md:w-[60%] md:border-l md:border-l-[#1A1C28] flex flex-col">
+            <div
+                class="basis-1/2 border-b border-b-[#1A1C28] pr-4 max-md:py-10"
+            >
+                <ul
+                    class="flex gap-x-2.5 xs:gap-x-5 sm:gap-x-9 items-center h-full pl-4 lg:pl-8 xl:pl-16"
+                >
+                    {
+                        navLinks.map((link: any) => (
+                            <li>
+                                <a
+                                    href={link.path}
+                                    class="text-[#747785] text-base"
+                                    aria-label={link.alt}
+                                >
+                                    {link.name}
+                                </a>
+                            </li>
+                        ))
+                    }
+                </ul>
+            </div>
+            <div class="basis-1/2 pr-4 max-md:py-10">
+                <ul
+                    class="flex gap-x-3 sm:gap-x-6 h-full items-center pl-4 lg:pl-8 xl:pl-16"
+                >
+                    {
+                        socialIcons.map((icon: any) => (
+                            <a href={icon.link} class="text-white">
+                                <li class="w-[40px] h-[40px] flex items-center justify-center xs:w-[60px] xs:h-[60px] bg-transparent border hover:bg-primary hover:border-primary transition duration-300 border-[#1A1C28] rounded-full">
+                                    <icon.Icon />
+                                </li>
+                            </a>
+                        ))
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+    <p class="text-white text-base mb-5 px-4 md:hidden">
+        © {new Date().getFullYear().toString()} ErakCode™. All rights reserved.
+    </p>
+</section>
