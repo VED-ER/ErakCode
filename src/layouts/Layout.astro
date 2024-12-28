@@ -9,6 +9,7 @@ import Team from "@components/Team.astro"
 import Footer from "@components/Footer.astro"
 import MultiSelect from "@components/MultiSelect.astro"
 import RangeSlider from "@components/RangeSlider.astro"
+import ContactForm from "@components/ContactForm.astro"
 
 const navLinks = [
     {
@@ -28,14 +29,6 @@ const navLinks = [
         path: "#team",
     },
 ]
-const servicesOptions = [
-    "Web Design",
-    "Web Development",
-    "Branding & Logo Design",
-    "App Development",
-    "Motion Graphics",
-    "Graphic Design",
-]
 ---
 
 <html lang="en" class="bg-background">
@@ -52,105 +45,7 @@ const servicesOptions = [
         <Services />
         <Portfolio />
         <Team />
-        <section id="contact" class="px-4 mb-[60px] mt-20">
-            <div
-                class="flex gap-x-20 max-w-[1348px] mx-auto bg-gradient-to-br from-[#BBC6FF1A] to-[#BBC6FF00] from-0% to-100% rounded-[60px] overflow-hidden"
-            >
-                <div
-                    class="basis-1/2 bg-form bg-no-repeat bg-[left_top_35px] bg-contain pl-20 py-16"
-                >
-                    <h2
-                        class="font-neuropolitcal text-[84px] text-white leading-[100px]"
-                    >
-                        Wanna work with us?
-                    </h2>
-                    <span class="text-base text-white mt-4"
-                        >We respond to inquiries within 24 hours.</span
-                    >
-                </div>
-                <div class="basis-1/2 pr-20 py-16">
-                    <form action="">
-                        <div class="">
-                            <label
-                                for="name"
-                                class="block text-sm text-[#747785] mb-2"
-                                >Name</label
-                            >
-                            <input
-                                type="text"
-                                id="name"
-                                class="text-white text-[18px] py-5 px-6 block w-full bg-transparent border border-white border-opacity-10 rounded-2xl focus:border-primary focus:ring-primary focus:ring-2 disabled:opacity-50 disabled:pointer-events-none outline-none leading-7"
-                                placeholder="Joe Doe"
-                            />
-                        </div>
-                        <div class="mt-[18px]">
-                            <label
-                                for="email"
-                                class="block text-sm text-[#747785] mb-2"
-                                >Email</label
-                            >
-                            <input
-                                type="email"
-                                id="email"
-                                class="text-white text-[18px] py-5 px-6 block w-full bg-transparent border border-white border-opacity-10 rounded-2xl focus:border-primary focus:ring-primary focus:ring-2 disabled:opacity-50 disabled:pointer-events-none outline-none leading-7"
-                                placeholder="wowemail@gmail.com"
-                            />
-                        </div>
-                        <div class="mt-[18px]">
-                            <label
-                                for="project-name"
-                                class="block text-sm text-[#747785] mb-2"
-                                >Project Name</label
-                            >
-                            <input
-                                type="text"
-                                id="project-name"
-                                class="text-white text-[18px] py-5 px-6 block w-full bg-transparent border border-white border-opacity-10 rounded-2xl focus:border-primary focus:ring-primary focus:ring-2 disabled:opacity-50 disabled:pointer-events-none outline-none leading-7"
-                                placeholder="Cool Project Name"
-                            />
-                        </div>
-                        <div class="mt-[18px]">
-                            <label
-                                for="required-service"
-                                class="block text-sm text-[#747785] mb-2"
-                                >Required Services</label
-                            >
-                            <!-- <MultiSelect /> -->
-                            <MultiSelect
-                                options={servicesOptions}
-                                name="selected-services"
-                                placeholder="Select required services..."
-                            />
-                        </div>
-                        <div class="mt-[18px]">
-                            <label
-                                for="message"
-                                class="block text-sm text-[#747785] mb-2"
-                                >Message</label
-                            >
-                            <textarea
-                                id="message"
-                                rows="3"
-                                class="text-white min-h-20 text-[18px] py-5 px-6 block w-full bg-transparent border border-white border-opacity-10 rounded-2xl focus:border-primary focus:ring-primary focus:ring-2 disabled:opacity-50 disabled:pointer-events-none outline-none leading-7"
-                                placeholder="Cool Project Name"></textarea>
-                        </div>
-                        <div class="mt-[18px]">
-                            <label
-                                for="message"
-                                class="block text-sm text-[#747785] mb-2"
-                                >Budget Range</label
-                            >
-                            <RangeSlider />
-                        </div>
-                        <button
-                            type="submit"
-                            class="bg-primary w-full rounded-full mt-[50px] hover:bg-opacity-50 transition duration-300 font-neuropolitcal text-[20px] py-5 text-white text-center"
-                            >Submit</button
-                        >
-                    </form>
-                </div>
-            </div>
-        </section>
+        <ContactForm />
         <Footer navLinks={navLinks} />
         <!-- <script>
 import "../scripts/menu.js";
