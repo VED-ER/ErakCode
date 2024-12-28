@@ -11,27 +11,37 @@ const { options, name, placeholder = "Select options..." } = Astro.props
 
 <div class="relative" data-multi-select>
     <div
-        class="border border-white border-opacity-10 py-5 px-6 rounded-2xl flex items-center flex-wrap gap-2.5 cursor-pointer bg-transparent"
+        tabindex="0"
+        aria-haspopup="listbox"
+        role="combobox"
+        aria-expanded="false"
+        class="focus:border-primary focus:ring-2 focus:ring-primary outline-none border border-white border-opacity-10 py-5 px-6 rounded-2xl flex items-center flex-wrap gap-2.5 cursor-pointer bg-transparent"
         data-selected-container
     >
         <input
             type="text"
-            class="outline-none border-none text-[18px] rounded-2xl flex-grow min-w-[60px] bg-transparent cursor-pointer"
+            class="outline-none pointer-events-none border-none text-[18px] rounded-2xl flex-grow min-w-[60px] bg-transparent cursor-pointer"
             placeholder={placeholder}
             readonly
-            data-display-input
+            data-services-input
+            disabled
         />
     </div>
 
     <div
         class="absolute w-full mt-1 max-h-60 overflow-y-auto border rounded-md bg-[#D0D2DE] hidden"
+        role="listbox"
+        tabindex="-1"
         data-options-container
     >
         {
-            options.map((option) => (
+            options.map((option, index) => (
                 <div
                     class="p-2 hover:bg-gray-100 cursor-pointer"
+                    role="option"
+                    aria-selected="false"
                     data-option={option}
+                    data-option-index={index}
                 >
                     {option}
                 </div>
@@ -52,38 +62,167 @@ const { options, name, placeholder = "Select options..." } = Astro.props
             this.optionsContainer = element.querySelector(
                 "[data-options-container]"
             )
-            this.displayInput = element.querySelector("[data-display-input]")
+            this.servicesInput = element.querySelector("[data-services-input]")
             this.valuesInput = element.querySelector("[data-values-input]")
             this.selectedValues = new Set()
+            this.activeIndex = -1
+            this.isOpen = false
 
             this.init()
         }
 
         init() {
             this.selectedContainer.addEventListener("click", () => {
-                this.optionsContainer.classList.toggle("hidden")
+                console.log("asd")
+
+                this.toggleDropdown()
             })
 
             this.optionsContainer.addEventListener("click", (e) => {
                 const option = e.target.closest("[data-option]")
-                if (option && !option.classList.contains("opacity-50")) {
+                if (option) {
                     const value = option.dataset.option
-                    this.addItem(value)
-                    this.markOptionAsSelected(option)
+                    this.toggleOption(value, option)
                 }
             })
 
             document.addEventListener("click", (e) => {
                 if (!this.container.contains(e.target)) {
-                    this.optionsContainer.classList.add("hidden")
+                    this.closeDropdown()
                 }
             })
+
+            this.selectedContainer.addEventListener("keydown", (e) =>
+                this.handleKeyDown(e)
+            )
+
+            this.selectedContainer.addEventListener("blur", () =>
+                this.closeDropdown()
+            )
+
+            this.optionsContainer.addEventListener("mouseover", (e) => {
+                const option = e.target.closest("[data-option]")
+                if (option) {
+                    this.setActiveOption(parseInt(option.dataset.optionIndex))
+                }
+            })
+        }
+
+        handleKeyDown(e) {
+            switch (e.key) {
+                case "Enter":
+                    e.preventDefault()
+                    if (!this.isOpen) {
+                        this.openDropdown()
+                    } else if (this.activeIndex >= 0) {
+                        const activeOption = this.getOptionByIndex(
+                            this.activeIndex
+                        )
+                        if (activeOption) {
+                            const value = activeOption.dataset.option
+                            this.toggleOption(value, activeOption)
+                        }
+                    }
+                    break
+                case "ArrowDown":
+                    e.preventDefault()
+                    if (!this.isOpen) {
+                        this.openDropdown()
+                    }
+                    this.moveActiveOption(1)
+                    break
+                case "ArrowUp":
+                    e.preventDefault()
+                    if (!this.isOpen) {
+                        this.openDropdown()
+                    }
+                    this.moveActiveOption(-1)
+                    break
+                case "Escape":
+                    this.closeDropdown()
+                    break
+                case "Backspace":
+                case "Delete":
+                    e.preventDefault()
+                    this.deleteSelectedItem()
+                    break
+            }
+        }
+
+        moveActiveOption(direction) {
+            const options = Array.from(
+                this.optionsContainer.querySelectorAll("[data-option]")
+            )
+            if (!options.length) return
+
+            let newIndex = this.activeIndex + direction
+
+            // Loop around at the ends
+            if (newIndex < 0) newIndex = options.length - 1
+            if (newIndex >= options.length) newIndex = 0
+
+            this.setActiveOption(newIndex)
+        }
+
+        setActiveOption(index) {
+            const options =
+                this.optionsContainer.querySelectorAll("[data-option]")
+            options.forEach((opt) => opt.classList.remove("bg-gray-100"))
+
+            this.activeIndex = index
+
+            const activeOption = this.getOptionByIndex(index)
+            if (activeOption) {
+                activeOption.classList.add("bg-gray-100")
+                activeOption.scrollIntoView({ block: "nearest" })
+            }
+        }
+
+        getOptionByIndex(index) {
+            return this.optionsContainer.querySelector(
+                `[data-option-index="${index}"]`
+            )
+        }
+
+        toggleDropdown() {
+            this.isOpen ? this.closeDropdown() : this.openDropdown()
+        }
+
+        openDropdown() {
+            console.log("in")
+
+            this.isOpen = true
+            this.optionsContainer.classList.remove("hidden")
+            this.selectedContainer.setAttribute("aria-expanded", "true")
+            this.setActiveOption(0)
+        }
+
+        closeDropdown() {
+            this.isOpen = false
+            this.optionsContainer.classList.add("hidden")
+            this.selectedContainer.setAttribute("aria-expanded", "false")
+            this.activeIndex = -1
+        }
+
+        toggleOption(value, option) {
+            if (this.selectedValues.has(value)) {
+                const item = this.selectedContainer.querySelector(
+                    `[data-value="${value}"]`
+                )
+                if (item) {
+                    this.removeItem(value, item)
+                }
+            } else {
+                this.addItem(value)
+                this.markOptionAsSelected(option)
+            }
         }
 
         createSelectedItem(value) {
             const item = document.createElement("div")
             item.className =
                 "bg-primary px-4 py-1.5 rounded-[8px] flex h-10 items-center text-[18px] text-white gap-1"
+            item.setAttribute("data-value", value)
 
             const textNode = document.createTextNode(value)
             item.appendChild(textNode)
@@ -104,8 +243,8 @@ const { options, name, placeholder = "Select options..." } = Astro.props
         }
 
         markOptionAsSelected(option) {
-            option.classList.add("opacity-50", "cursor-not-allowed")
-            option.classList.remove("hover:bg-gray-100", "cursor-pointer")
+            option.classList.add("opacity-50")
+            option.setAttribute("aria-selected", "true")
         }
 
         unmarkOptionAsSelected(value) {
@@ -113,8 +252,8 @@ const { options, name, placeholder = "Select options..." } = Astro.props
                 `[data-option="${value}"]`
             )
             if (option) {
-                option.classList.remove("opacity-50", "cursor-not-allowed")
-                option.classList.add("hover:bg-gray-100", "cursor-pointer")
+                option.classList.remove("opacity-50")
+                option.setAttribute("aria-selected", "false")
             }
         }
 
@@ -122,7 +261,7 @@ const { options, name, placeholder = "Select options..." } = Astro.props
             if (this.selectedValues.has(value)) return
 
             const item = this.createSelectedItem(value)
-            this.selectedContainer.insertBefore(item, this.displayInput)
+            this.selectedContainer.insertBefore(item, this.servicesInput)
             this.selectedValues.add(value)
             this.updateValuesInput()
         }
@@ -132,6 +271,18 @@ const { options, name, placeholder = "Select options..." } = Astro.props
             element.remove()
             this.unmarkOptionAsSelected(value)
             this.updateValuesInput()
+        }
+
+        deleteSelectedItem() {
+            if (this.selectedValues.size > 0) {
+                const lastSelectedValue = Array.from(this.selectedValues).pop()
+                const itemToDelete = this.selectedContainer.querySelector(
+                    `[data-value="${lastSelectedValue}"]`
+                )
+                if (itemToDelete) {
+                    this.removeItem(lastSelectedValue, itemToDelete)
+                }
+            }
         }
 
         updateValuesInput() {
