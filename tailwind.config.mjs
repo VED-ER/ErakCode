@@ -20,6 +20,7 @@ export default {
             },
             backgroundImage: {
                 hero: "url('./src/assets/hero.png')",
+                form: "url('./src/assets/logo-bg.png')",
             },
         },
     },
