@@ -1,0 +1,145 @@
+---
+// MultiSelect.astro
+interface Props {
+    options: string[]
+    name: string
+    placeholder?: string
+}
+
+const { options, name, placeholder = "Select options..." } = Astro.props
+---
+
+<div class="relative" data-multi-select>
+    <div
+        class="border border-white border-opacity-10 py-5 px-6 rounded-2xl flex items-center flex-wrap gap-2.5 cursor-pointer bg-transparent"
+        data-selected-container
+    >
+        <input
+            type="text"
+            class="outline-none border-none text-[18px] rounded-2xl flex-grow min-w-[60px] bg-transparent cursor-pointer"
+            placeholder={placeholder}
+            readonly
+            data-display-input
+        />
+    </div>
+
+    <div
+        class="absolute w-full mt-1 max-h-60 overflow-y-auto border rounded-md bg-[#D0D2DE] hidden"
+        data-options-container
+    >
+        {
+            options.map((option) => (
+                <div
+                    class="p-2 hover:bg-gray-100 cursor-pointer"
+                    data-option={option}
+                >
+                    {option}
+                </div>
+            ))
+        }
+    </div>
+
+    <input type="hidden" name={name} data-values-input />
+</div>
+
+<script is:inline>
+    class MultiSelect {
+        constructor(element) {
+            this.container = element
+            this.selectedContainer = element.querySelector(
+                "[data-selected-container]"
+            )
+            this.optionsContainer = element.querySelector(
+                "[data-options-container]"
+            )
+            this.displayInput = element.querySelector("[data-display-input]")
+            this.valuesInput = element.querySelector("[data-values-input]")
+            this.selectedValues = new Set()
+
+            this.init()
+        }
+
+        init() {
+            this.selectedContainer.addEventListener("click", () => {
+                this.optionsContainer.classList.toggle("hidden")
+            })
+
+            this.optionsContainer.addEventListener("click", (e) => {
+                const option = e.target.closest("[data-option]")
+                if (option && !option.classList.contains("opacity-50")) {
+                    const value = option.dataset.option
+                    this.addItem(value)
+                    this.markOptionAsSelected(option)
+                }
+            })
+
+            document.addEventListener("click", (e) => {
+                if (!this.container.contains(e.target)) {
+                    this.optionsContainer.classList.add("hidden")
+                }
+            })
+        }
+
+        createSelectedItem(value) {
+            const item = document.createElement("div")
+            item.className =
+                "bg-primary px-4 py-1.5 rounded-[8px] flex h-10 items-center text-[18px] text-white gap-1"
+
+            const textNode = document.createTextNode(value)
+            item.appendChild(textNode)
+
+            const removeBtn = document.createElement("span")
+            removeBtn.className =
+                "text-white hover:text-black px-1 font-bold ml-1 cursor-pointer"
+            removeBtn.setAttribute("data-remove", "")
+            removeBtn.textContent = "×"
+
+            removeBtn.addEventListener("click", (e) => {
+                e.stopPropagation()
+                this.removeItem(value, item)
+            })
+
+            item.appendChild(removeBtn)
+            return item
+        }
+
+        markOptionAsSelected(option) {
+            option.classList.add("opacity-50", "cursor-not-allowed")
+            option.classList.remove("hover:bg-gray-100", "cursor-pointer")
+        }
+
+        unmarkOptionAsSelected(value) {
+            const option = this.optionsContainer.querySelector(
+                `[data-option="${value}"]`
+            )
+            if (option) {
+                option.classList.remove("opacity-50", "cursor-not-allowed")
+                option.classList.add("hover:bg-gray-100", "cursor-pointer")
+            }
+        }
+
+        addItem(value) {
+            if (this.selectedValues.has(value)) return
+
+            const item = this.createSelectedItem(value)
+            this.selectedContainer.insertBefore(item, this.displayInput)
+            this.selectedValues.add(value)
+            this.updateValuesInput()
+        }
+
+        removeItem(value, element) {
+            this.selectedValues.delete(value)
+            element.remove()
+            this.unmarkOptionAsSelected(value)
+            this.updateValuesInput()
+        }
+
+        updateValuesInput() {
+            this.valuesInput.value = Array.from(this.selectedValues).join(",")
+        }
+    }
+
+    document.querySelectorAll("[data-multi-select]").forEach((element) => {
+        new MultiSelect(element)
+    })
+</script>
