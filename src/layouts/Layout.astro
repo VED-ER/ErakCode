@@ -8,6 +8,7 @@ import Portfolio from "@components/Portfolio.astro"
 import Team from "@components/Team.astro"
 import Footer from "@components/Footer.astro"
 import MultiSelect from "@components/MultiSelect.astro"
+import RangeSlider from "@components/RangeSlider.astro"
 
 const navLinks = [
     {
@@ -132,6 +133,14 @@ const servicesOptions = [
                                 rows="3"
                                 class="text-white min-h-20 text-[18px] py-5 px-6 block w-full bg-transparent border border-white border-opacity-10 rounded-2xl focus:border-primary focus:ring-primary focus:ring-2 disabled:opacity-50 disabled:pointer-events-none outline-none leading-7"
                                 placeholder="Cool Project Name"></textarea>
+                        </div>
+                        <div class="mt-[18px]">
+                            <label
+                                for="message"
+                                class="block text-sm text-[#747785] mb-2"
+                                >Budget Range</label
+                            >
+                            <RangeSlider />
                         </div>
                         <button
                             type="submit"

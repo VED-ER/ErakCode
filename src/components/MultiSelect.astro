@@ -67,14 +67,13 @@ const { options, name, placeholder = "Select options..." } = Astro.props
             this.selectedValues = new Set()
             this.activeIndex = -1
             this.isOpen = false
+            this.ignoreBlur = false
 
             this.init()
         }
 
         init() {
             this.selectedContainer.addEventListener("click", () => {
-                console.log("asd")
-
                 this.toggleDropdown()
             })
 
@@ -83,7 +82,15 @@ const { options, name, placeholder = "Select options..." } = Astro.props
                 if (option) {
                     const value = option.dataset.option
                     this.toggleOption(value, option)
+                    // Reset active index after click and maintain focus
+                    this.activeIndex = parseInt(option.dataset.optionIndex)
+                    this.selectedContainer.focus()
                 }
+            })
+
+            this.optionsContainer.addEventListener("mousedown", (e) => {
+                // Prevent blur event from firing before click
+                this.ignoreBlur = true
             })
 
             document.addEventListener("click", (e) => {
@@ -96,9 +103,13 @@ const { options, name, placeholder = "Select options..." } = Astro.props
                 this.handleKeyDown(e)
             )
 
-            this.selectedContainer.addEventListener("blur", () =>
-                this.closeDropdown()
-            )
+            this.selectedContainer.addEventListener("blur", () => {
+                if (!this.ignoreBlur) {
+                    this.closeDropdown()
+                }
+                // Reset the flag
+                this.ignoreBlur = false
+            })
 
             this.optionsContainer.addEventListener("mouseover", (e) => {
                 const option = e.target.closest("[data-option]")
@@ -109,6 +120,15 @@ const { options, name, placeholder = "Select options..." } = Astro.props
         }
 
         handleKeyDown(e) {
+            if (
+                !this.isOpen &&
+                e.key !== "Enter" &&
+                e.key !== "Backspace" &&
+                e.key !== "Delete"
+            ) {
+                this.openDropdown()
+            }
+
             switch (e.key) {
                 case "Enter":
                     e.preventDefault()
@@ -126,16 +146,10 @@ const { options, name, placeholder = "Select options..." } = Astro.props
                     break
                 case "ArrowDown":
                     e.preventDefault()
-                    if (!this.isOpen) {
-                        this.openDropdown()
-                    }
                     this.moveActiveOption(1)
                     break
                 case "ArrowUp":
                     e.preventDefault()
-                    if (!this.isOpen) {
-                        this.openDropdown()
-                    }
                     this.moveActiveOption(-1)
                     break
                 case "Escape":
@@ -189,19 +203,20 @@ const { options, name, placeholder = "Select options..." } = Astro.props
         }
 
         openDropdown() {
-            console.log("in")
-
             this.isOpen = true
             this.optionsContainer.classList.remove("hidden")
             this.selectedContainer.setAttribute("aria-expanded", "true")
-            this.setActiveOption(0)
+            // Only set active option if there isn't one already
+            if (this.activeIndex === -1) {
+                this.setActiveOption(0)
+            }
         }
 
         closeDropdown() {
             this.isOpen = false
             this.optionsContainer.classList.add("hidden")
             this.selectedContainer.setAttribute("aria-expanded", "false")
-            this.activeIndex = -1
+            // Don't reset active index when closing
         }
 
         toggleOption(value, option) {

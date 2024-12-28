@@ -1,0 +1,144 @@
+<div class="max-w-xl mx-auto py-6">
+    <div class="relative">
+        <!-- Range Container -->
+        <div class="relative">
+            <!-- Start and End Labels -->
+            <div class="flex justify-between mb-2">
+                <span class="text-[20px] font-medium text-gray-700 select-none"
+                    >1500</span
+                >
+                <span class="text-[20px] font-medium text-gray-700 select-none"
+                    >100k+</span
+                >
+            </div>
+
+            <!-- Slider Track -->
+            <div class="h-2 bg-white bg-opacity-20 rounded-full">
+                <!-- Active Track -->
+                <div
+                    class="absolute h-1.5 bg-white rounded-full"
+                    id="active-track"
+                >
+                </div>
+            </div>
+
+            <!-- Slider Handle with Value -->
+            <div
+                class="absolute bottom-0 transform translate-y-[30%] w-6 h-6 bg-white rounded-full cursor-pointer flex items-center justify-center shadow-lg transition-transform hover:scale-110"
+                id="slider-handle"
+            >
+                <!-- Value Tooltip -->
+                <div
+                    class="absolute -top-10 left-1/2 transform -translate-x-1/2 text-white px-2 py-1 rounded text-[22px] whitespace-nowrap select-none"
+                    id="value-tooltip"
+                >
+                    50
+                </div>
+            </div>
+            <!-- <div class="flex justify-between mb-4 mt-2 opacity-0">
+                <span class="text-sm font-medium text-gray-700">0</span>
+                <span class="text-sm font-medium text-gray-700">100</span>
+            </div> -->
+        </div>
+    </div>
+</div>
+
+<script is:inline>
+    const sliderHandle = document.getElementById("slider-handle")
+    const activeTrack = document.getElementById("active-track")
+    const valueTooltip = document.getElementById("value-tooltip")
+    const track = sliderHandle.parentElement
+
+    const MIN_VALUE = 1500
+    const MAX_VALUE = 100000
+    const STEP = 500
+    const VALUE_RANGE = MAX_VALUE - MIN_VALUE
+
+    let isDragging = false
+    let startX
+    let sliderLeft
+
+    function formatNumber(num) {
+        return num.toLocaleString("en-US")
+    }
+
+    function roundToStep(value) {
+        return Math.round(value / STEP) * STEP
+    }
+
+    function updateSlider(clientX) {
+        const trackRect = track.getBoundingClientRect()
+        const trackWidth = trackRect.width
+
+        // Calculate new position
+        let newLeft = clientX - trackRect.left - sliderHandle.offsetWidth / 2
+
+        // Constrain to track bounds
+        newLeft = Math.max(
+            0,
+            Math.min(newLeft, trackWidth - sliderHandle.offsetWidth)
+        )
+
+        // Calculate percentage and value
+        const percentage =
+            (newLeft / (trackWidth - sliderHandle.offsetWidth)) * 100
+        const rawValue = (percentage / 100) * VALUE_RANGE + MIN_VALUE
+        const steppedValue = roundToStep(rawValue)
+
+        // Recalculate percentage based on stepped value for exact positioning
+        const steppedPercentage =
+            ((steppedValue - MIN_VALUE) / VALUE_RANGE) * 100
+
+        // Update handle position
+        const steppedLeft =
+            (steppedPercentage / 100) * (trackWidth - sliderHandle.offsetWidth)
+        sliderHandle.style.left = `${steppedLeft}px`
+
+        // Update active track width
+        activeTrack.style.width = `${steppedPercentage}%`
+
+        // Update tooltip value with formatted number
+        valueTooltip.textContent = `${formatNumber(steppedValue)}${steppedValue === MAX_VALUE ? "+" : ""}`
+    }
+
+    function startDragging(e) {
+        isDragging = true
+        startX = e.clientX - sliderHandle.offsetLeft
+
+        // Add event listeners for drag and release
+        document.addEventListener("mousemove", onDrag)
+        document.addEventListener("mouseup", stopDragging)
+    }
+
+    function onDrag(e) {
+        if (!isDragging) return
+        e.preventDefault()
+        updateSlider(e.clientX)
+    }
+
+    function stopDragging() {
+        isDragging = false
+        document.removeEventListener("mousemove", onDrag)
+        document.removeEventListener("mouseup", stopDragging)
+    }
+
+    // Initialize slider position
+    window.addEventListener("load", () => {
+        updateSlider(track.getBoundingClientRect().left + track.offsetWidth / 2)
+    })
+
+    // Add mouse event listeners
+    sliderHandle.addEventListener("mousedown", startDragging)
+
+    // Add touch event listeners for mobile support
+    sliderHandle.addEventListener("touchstart", (e) => {
+        startDragging(e.touches[0])
+    })
+
+    document.addEventListener("touchmove", (e) => {
+        if (!isDragging) return
+        onDrag(e.touches[0])
+    })
+
+    document.addEventListener("touchend", stopDragging)
+</script>
