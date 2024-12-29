@@ -5,11 +5,11 @@
         <div class="flex justify-between mb-2">
             <span
                 class="text-[20px] font-medium text-white text-opacity-50 select-none"
-                >1,500</span
+                >$1,500</span
             >
             <span
                 class="text-[20px] font-medium text-white text-opacity-50 select-none"
-                >100k</span
+                >$100k</span
             >
         </div>
 
@@ -34,7 +34,6 @@
                     id="value-tooltip"
                     class="absolute -top-10 left-1/2 transform -translate-x-1/2 text-white px-2 py-1 rounded text-[22px] whitespace-nowrap select-none"
                 >
-                    50,750
                 </div>
             </div>
         </div>
@@ -42,9 +41,9 @@
 </div>
 
 <script is:inline>
-    const MIN_VALUE = 1500
+    const MIN_VALUE = 100
     const MAX_VALUE = 100000
-    const STEP = 500
+    const STEP = 100
     const VALUE_RANGE = MAX_VALUE - MIN_VALUE
 
     const sliderHandle = document.getElementById("slider-handle")
@@ -52,7 +51,7 @@
     const tooltip = document.getElementById("value-tooltip")
     const track = sliderHandle.parentElement
 
-    let currentValue = 50750
+    let currentValue = 50000
     let isDragging = false
 
     const formatValue = (value) => value.toLocaleString("en-US")
@@ -67,7 +66,7 @@
         activeTrack.style.width = `${percentage}%`
 
         // Update tooltip and ARIA attributes
-        tooltip.textContent = `${formatValue(value)}${value === 100000 ? "+" : ""}`
+        tooltip.textContent = `$${formatValue(value)}${value === 100000 ? "+" : ""}`
         sliderHandle.setAttribute("aria-valuenow", value)
     }
 
