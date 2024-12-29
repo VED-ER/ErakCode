@@ -4,6 +4,7 @@ import logoWhite from "@assets/logo-white.png"
 import x from "@assets/x.svg"
 import hamburger from "@assets/hamburger.svg"
 import Button from "./Button.astro"
+import BookCallButton from "./BookCallButton.astro"
 
 const { navLinks } = Astro.props
 ---
@@ -37,7 +38,9 @@ const { navLinks } = Astro.props
                 })
             }
         </ul>
-        <Button className="mr-[18px] hidden lg:block" />
+        <div class="max-lg:hidden">
+            <BookCallButton />
+        </div>
         <!-- Mobile -->
         <div
             id="hamburger-button"
@@ -82,29 +85,32 @@ const { navLinks } = Astro.props
             </div>
         </div>
     </nav>
-</header>
 
-<script>
-    const hamburgerButton = document.querySelector("#hamburger-button")
-    const mobileMenu = document.querySelector("#hamburger-menu")
-    const closeMenuBtn = document.querySelector("#hamburger-close-menu")
-    const mobileMenuLinks = document.querySelector("#mobile-menu-links")
+    <script>
+        const hamburgerButton = document.querySelector("#hamburger-button")
+        const mobileMenu = document.querySelector("#hamburger-menu")
+        const closeMenuBtn = document.querySelector("#hamburger-close-menu")
+        const mobileMenuLinks = document.querySelector("#mobile-menu-links")
 
-    hamburgerButton?.addEventListener("click", () => {
-        hamburgerButton.setAttribute("aria-expanded", "true")
-        mobileMenu?.classList.replace("translate-x-full", "translate-x-0")
-    })
+        hamburgerButton?.addEventListener("click", () => {
+            hamburgerButton.setAttribute("aria-expanded", "true")
+            mobileMenu?.classList.replace("translate-x-full", "translate-x-0")
+        })
 
-    closeMenuBtn?.addEventListener("click", () => {
-        hamburgerButton?.setAttribute("aria-expanded", "false")
-        mobileMenu?.classList.replace("translate-x-0", "translate-x-full")
-    })
-
-    mobileMenuLinks?.addEventListener("click", (e) => {
-        const target = e.target as HTMLElement
-        if (target.tagName === "A") {
+        closeMenuBtn?.addEventListener("click", () => {
             hamburgerButton?.setAttribute("aria-expanded", "false")
             mobileMenu?.classList.replace("translate-x-0", "translate-x-full")
-        }
-    })
-</script>
+        })
+
+        mobileMenuLinks?.addEventListener("click", (e) => {
+            const target = e.target as HTMLElement
+            if (target.tagName === "A") {
+                hamburgerButton?.setAttribute("aria-expanded", "false")
+                mobileMenu?.classList.replace(
+                    "translate-x-0",
+                    "translate-x-full"
+                )
+            }
+        })
+    </script>
+</header>

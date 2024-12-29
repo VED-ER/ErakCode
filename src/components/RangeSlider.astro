@@ -82,7 +82,7 @@
     }
 
     const startDrag = (event) => {
-        sliderHandle.focus()
+        // sliderHandle.focus()
         isDragging = true
         const moveHandler =
             event.type === "mousedown" ? handleMouseMove : handleTouchMove
@@ -140,7 +140,6 @@
     }
 
     const handleKeyboard = (event) => {
-        event.preventDefault()
         let newValue = currentValue
         switch (event.key) {
             case "ArrowLeft":
@@ -152,9 +151,11 @@
                 newValue += STEP
                 break
             case "Home":
+                event.preventDefault()
                 newValue = MIN_VALUE
                 break
             case "End":
+                event.preventDefault()
                 newValue = MAX_VALUE
                 break
         }
