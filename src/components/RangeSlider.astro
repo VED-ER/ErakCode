@@ -9,7 +9,7 @@
             >
             <span
                 class="text-[20px] font-medium text-white text-opacity-50 select-none"
-                >100,000</span
+                >100k</span
             >
         </div>
 
@@ -84,11 +84,23 @@
     const startDrag = (event) => {
         sliderHandle.focus()
         isDragging = true
-        document.addEventListener("mousemove", handleDrag)
-        document.addEventListener("mouseup", stopDrag)
+        const moveHandler =
+            event.type === "mousedown" ? handleMouseMove : handleTouchMove
+        const endHandler =
+            event.type === "mousedown" ? stopMouseDrag : stopTouchDrag
+
+        document.addEventListener(
+            event.type === "mousedown" ? "mousemove" : "touchmove",
+            moveHandler,
+            { passive: false }
+        )
+        document.addEventListener(
+            event.type === "mousedown" ? "mouseup" : "touchend",
+            endHandler
+        )
     }
 
-    const handleDrag = (event) => {
+    const handleMouseMove = (event) => {
         if (!isDragging) return
         const newValue = calculateValue(event.clientX)
         if (newValue !== currentValue) {
@@ -97,10 +109,26 @@
         }
     }
 
-    const stopDrag = () => {
+    const handleTouchMove = (event) => {
+        event.preventDefault()
+        if (!isDragging || event.touches.length === 0) return
+        const newValue = calculateValue(event.touches[0].clientX)
+        if (newValue !== currentValue) {
+            currentValue = newValue
+            updateSliderUI(currentValue)
+        }
+    }
+
+    const stopMouseDrag = () => {
         isDragging = false
-        document.removeEventListener("mousemove", handleDrag)
-        document.removeEventListener("mouseup", stopDrag)
+        document.removeEventListener("mousemove", handleMouseMove)
+        document.removeEventListener("mouseup", stopMouseDrag)
+    }
+
+    const stopTouchDrag = () => {
+        isDragging = false
+        document.removeEventListener("touchmove", handleTouchMove)
+        document.removeEventListener("touchend", stopTouchDrag)
     }
 
     const handleTrackClick = (event) => {
@@ -112,37 +140,36 @@
     }
 
     const handleKeyboard = (event) => {
+        event.preventDefault()
         let newValue = currentValue
         switch (event.key) {
             case "ArrowLeft":
             case "ArrowDown":
-                event.preventDefault()
                 newValue -= STEP
                 break
             case "ArrowRight":
             case "ArrowUp":
-                event.preventDefault()
                 newValue += STEP
                 break
             case "Home":
-                event.preventDefault()
                 newValue = MIN_VALUE
                 break
             case "End":
-                event.preventDefault()
                 newValue = MAX_VALUE
                 break
         }
         newValue = Math.max(MIN_VALUE, Math.min(MAX_VALUE, newValue))
         if (newValue !== currentValue) {
             currentValue = newValue
-            updateSliderUI(currentValue)
+            updateSliderUI(newValue)
         }
     }
 
     sliderHandle.addEventListener("mousedown", startDrag)
+    sliderHandle.addEventListener("touchstart", (e) => startDrag(e.touches[0]))
     sliderHandle.addEventListener("keydown", handleKeyboard)
 
+    // Add track click event
     track.addEventListener("click", handleTrackClick)
 
     // Initialize slider position
