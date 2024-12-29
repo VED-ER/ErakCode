@@ -1,5 +1,7 @@
 ---
 import { Image } from "astro:assets"
+import avatar1 from "@assets/avatar1.png"
+import avatar2 from "@assets/avatar2.png"
 ---
 
 <a
@@ -7,10 +9,10 @@ import { Image } from "astro:assets"
     target="_blank"
     class="mr-[18px] flex text-white font-neuropolitcal text-sm items-center justify-center gap-x-5"
     >Book a call <div class="flex">
-        <!-- <Image src={avatar1} alt={"avatar"} class={"w-11 h-11"} /><Image
+        <Image src={avatar1} alt={"avatar"} class={"w-11 h-11"} /><Image
             src={avatar2}
             alt={"avatar"}
-            class="-ml-2.5 w-11 h-11"
-        /> -->
+            class="-ml-2.5 w-11 h-11 border-2 border-[#090A0E] rounded-full"
+        />
     </div></a
 >

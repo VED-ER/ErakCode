@@ -61,13 +61,14 @@ const { navLinks } = Astro.props
                     id="hamburger-close-menu"
                     role="button"
                     aria-label="Close Menu"
+					class="mr-[7px] mt-[15px]"
                 >
                     <Image src={x} class={"w-5 h-5"} alt={"close"} />
                 </div>
             </div>
             <div
                 id="mobile-menu-links"
-                class="flex flex-col h-full h-f gap-y-16 justify-center items-center"
+                class="flex flex-col h-full h-f mb-[90px] gap-y-16 justify-center items-center"
             >
                 {
                     navLinks.map((link: any) => {
@@ -81,6 +82,13 @@ const { navLinks } = Astro.props
                         )
                     })
                 }
+                <a
+                    href="https://calendly.com/vedran1-erak1/30min"
+                    target="_blank"
+                    class="text-white text-base p-2"
+                >
+                    Book a call
+                </a>
                 <Button className="py-5 px-10" />
             </div>
         </div>

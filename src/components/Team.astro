@@ -1,22 +1,23 @@
 ---
 import SectionHeading from "./SectionHeading.astro"
 import { Image } from "astro:assets"
+import team1 from "@assets/team-1.png"
 
 const TEAM = [
     {
         name: "Vedran Erak",
         title: "Founder & Fullstack Developer",
-        // img: team1,
+        img: team1,
     },
     {
         name: "Sergej Sovilj",
         title: "UI & UX Designer",
-        // img: team1,
+        img: team1,
     },
     {
         name: "Vedran Erak",
         title: "Founder & Fullstack Developer",
-        // img: team1,
+        img: team1,
     },
 ]
 ---
@@ -41,7 +42,7 @@ const TEAM = [
                             {t.title}
                         </h6>
                     </div>
-                    {/* <Image src={t.img} alt={"team"} class="-mt-5" /> */}
+                    <Image src={t.img} alt={"team"} class="filter grayscale hover:grayscale-0" />
                 </div>
             ))
         }
