@@ -18,10 +18,6 @@ export default {
                 "2xl": "1440px",
                 "3xl": "1536px",
             },
-            backgroundImage: {
-                hero: "url('./src/assets/hero.png')",
-                form: "url('./src/assets/logo-bg.png')",
-            },
         },
     },
     plugins: [],
