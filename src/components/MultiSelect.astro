@@ -17,12 +17,12 @@ const { options, name, placeholder = "Select options..." } = Astro.props
         aria-haspopup="listbox"
         role="combobox"
         aria-expanded="false"
-        class="focus:border-primary focus:ring-2 focus:ring-primary outline-none border border-white border-opacity-10 py-5 px-6 rounded-2xl flex items-center flex-wrap gap-2.5 cursor-pointer bg-transparent"
+        class="focus:border-primary focus:ring-2 focus:ring-primary outline-none border border-white border-opacity-10 py-[14px] px-6 rounded-2xl flex items-center flex-wrap gap-2.5 cursor-pointer bg-transparent"
         data-selected-container
     >
         <input
             type="text"
-            class="outline-none pointer-events-none border-none text-[18px] rounded-2xl flex-grow bg-transparent cursor-pointer"
+            class="outline-none placeholder-[#262831] pointer-events-none border-none text-[18px] rounded-2xl flex-grow bg-transparent cursor-pointer"
             placeholder={placeholder}
             readonly
             data-services-input
@@ -241,10 +241,12 @@ const { options, name, placeholder = "Select options..." } = Astro.props
         createSelectedItem(value) {
             const item = document.createElement("div")
             item.className =
-                "bg-primary px-4 py-1.5 rounded-[8px] flex h-10 items-center text-[18px] text-white gap-1"
+                "bg-primary px-4 py-1.5 rounded-[8px] overflow-hidden flex min-h-10 max-w-[calc(100%-53px)] items-center text-[18px] text-white gap-1"
             item.setAttribute("data-value", value)
 
-            const textNode = document.createTextNode(value)
+            const textNode = document.createElement("span")
+            // textNode.className = "truncate inline-block line-clamp-1"
+            textNode.textContent = value
             item.appendChild(textNode)
 
             const removeBtn = document.createElement("span")

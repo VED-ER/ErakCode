@@ -4,16 +4,20 @@ import MultiSelect from "./MultiSelect.astro"
 import RangeSlider from "./RangeSlider.astro"
 
 const servicesOptions = [
+    "Full Website (Design + Development)",
+    "Website VIP Package (Logo + Design + Development)",
+    "App VIP Package  (Logo + Design + Development)",
     "Web Design",
     "Web Development",
-    "Branding & Logo Design",
+    "Logo Design",
+    "Branding",
     "App Development",
     "Motion Graphics",
     "Graphic Design",
 ]
 ---
 
-<section id="contact" class="mb-[60px] mt-20">
+<section id="contact" class="mt-20">
     <div
         class="bg-gradient-to-br from-[#BBC6FF1A] to-[#BBC6FF00] from-0% to-100%"
     >
@@ -32,17 +36,24 @@ const servicesOptions = [
                         >
                             Let's Get in Touch
                         </h2>
-                        <div
-                            class="bg-[#000102] max-w-[340px] py-8 px-5 md:px-6 lg:px-9 w-5/6 md:w-5/6 lg:w-3/4 xl:w-2/3 rounded-[30px] mt-11"
+
+                        <a
+                            class="inline-block group max-w-[340px] w-5/6 md:w-5/6 lg:w-3/4 xl:w-2/3 mt-11 bg-[#000102] hover:bg-white py-8 px-5 md:px-6 lg:px-9 rounded-[30px] transition duration-300"
+                            href="https://calendly.com/vedran1-erak1/30min"
+							target="_blank"
                         >
-                            <p class="text-white text-base mb-[50px]">
-                                Let's discuss about your project directly on
-                                meeting!
-                            </p>
-                            <div class="flex">
-                                <BookCallButton />
+                            <div>
+                                <p class="text-white group-hover:text-[#000102] text-base mb-[50px]">
+                                    Let's discuss about your project directly on
+                                    meeting!
+                                </p>
+                                <div class="flex">
+                                    <BookCallButton
+                                        classList="group-hover:text-[#000102]"
+                                    />
+                                </div>
                             </div>
-                        </div>
+                        </a>
                         <!-- <span class="text-base text-white mt-4"
                     >We respond to inquiries within 24 hours.</span
                 > -->
@@ -63,8 +74,8 @@ const servicesOptions = [
                             <input
                                 type="text"
                                 id="name"
-                                class="text-white text-[18px] py-5 px-6 block w-full bg-transparent border border-white border-opacity-10 rounded-2xl focus:border-primary focus:ring-primary focus:ring-2 disabled:opacity-50 disabled:pointer-events-none outline-none leading-7"
-                                placeholder="Joe Doe"
+                                class="text-white placeholder-[#262831] text-[18px] py-5 px-6 block w-full bg-transparent border border-white border-opacity-10 rounded-2xl focus:border-primary focus:ring-primary focus:ring-2 disabled:opacity-50 disabled:pointer-events-none outline-none leading-7"
+                                placeholder="Enter your name"
                             />
                         </div>
                         <div class="mt-[18px]">
@@ -76,21 +87,8 @@ const servicesOptions = [
                             <input
                                 type="email"
                                 id="email"
-                                class="text-white text-[18px] py-5 px-6 block w-full bg-transparent border border-white border-opacity-10 rounded-2xl focus:border-primary focus:ring-primary focus:ring-2 disabled:opacity-50 disabled:pointer-events-none outline-none leading-7"
-                                placeholder="wowemail@gmail.com"
-                            />
-                        </div>
-                        <div class="mt-[18px]">
-                            <label
-                                for="project-name"
-                                class="block text-sm text-[#747785] mb-2"
-                                >Project Name</label
-                            >
-                            <input
-                                type="text"
-                                id="project-name"
-                                class="text-white text-[18px] py-5 px-6 block w-full bg-transparent border border-white border-opacity-10 rounded-2xl focus:border-primary focus:ring-primary focus:ring-2 disabled:opacity-50 disabled:pointer-events-none outline-none leading-7"
-                                placeholder="Cool Project Name"
+                                class="text-white placeholder-[#262831] text-[18px] py-5 px-6 block w-full bg-transparent border border-white border-opacity-10 rounded-2xl focus:border-primary focus:ring-primary focus:ring-2 disabled:opacity-50 disabled:pointer-events-none outline-none leading-7"
+                                placeholder="Enter your e-mail"
                             />
                         </div>
                         <div class="mt-[18px]">
@@ -110,13 +108,14 @@ const servicesOptions = [
                             <label
                                 for="message"
                                 class="block text-sm text-[#747785] mb-2"
-                                >Message</label
+                                >Tell us a little about your project</label
                             >
                             <textarea
                                 id="message"
                                 rows="3"
-                                class="text-white min-h-20 text-[18px] py-5 px-6 block w-full bg-transparent border border-white border-opacity-10 rounded-2xl focus:border-primary focus:ring-primary focus:ring-2 disabled:opacity-50 disabled:pointer-events-none outline-none leading-7"
-                                placeholder="Cool Project Name"></textarea>
+                                class="text-white placeholder-[#262831] min-h-20 text-[18px] py-5 px-6 block w-full bg-transparent border border-white border-opacity-10 rounded-2xl focus:border-primary focus:ring-primary focus:ring-2 disabled:opacity-50 disabled:pointer-events-none outline-none leading-7"
+                                placeholder="Enter your project name and description"
+                            ></textarea>
                         </div>
                         <div class="mt-[18px]">
                             <label
@@ -128,7 +127,7 @@ const servicesOptions = [
                         </div>
                         <button
                             type="submit"
-                            class="bg-primary outline-white w-full rounded-full mt-[50px] hover:bg-opacity-50 transition duration-300 font-neuropolitcal text-[20px] py-5 text-white text-center"
+                            class="bg-primary hover:bg-white outline-white w-full rounded-full mt-[50px] transition duration-300 font-neuropolitcal text-[20px] py-5 text-white hover:text-primary text-center"
                             >Submit</button
                         >
                     </form>

@@ -107,14 +107,14 @@ import "../scripts/menu.js";
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
                     navLinks.forEach((link) =>
-                        link.classList.remove("text-white", "font-bold")
+                        link.classList.remove("text-white", "font-semibold")
                     )
 
                     const activeLink = document.querySelector(
                         `.nav-link[href="#${entry.target.id}"]`
                     )
                     if (activeLink)
-                        activeLink.classList.add("text-white", "font-bold")
+                        activeLink.classList.add("text-white", "font-semibold")
                 }
             })
         }, observerOptions)

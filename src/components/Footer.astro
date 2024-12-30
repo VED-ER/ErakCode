@@ -49,10 +49,10 @@ const socialIcons = [
     <div class="flex max-md:flex-col justify-center">
         <div class="md:w-[40%] 2xl:w-[45%] pl-4 lg:pl-8">
             <div
-                class="flex pt-8 md:pt-16 flex-col md:mb-16 md:max-w-[445px] pr-4 lg:pr-8 xl:pr-20 md:ml-auto"
+                class="flex pt-8 md:pt-16 flex-col max-md:items-center md:mb-16 md:max-w-[445px] pr-4 lg:pr-8 xl:pr-20 md:ml-auto"
             >
-                <Image src={logoWhite} alt={"logo"} class="max-sm:max-w-[250px] max-w-[290px] h-auto" />
-                <p class="text-base text-[#747785] mt-7 mb-5 md:mb-11">
+                <Image src={logoWhite} alt={"logo"} class="max-sm:max-w-[250px] max-lg:max-w-[270px] max-w-[290px] h-auto" />
+                <p class="text-base text-[#747785] max-md:max-w-[500px] max-md:text-center mt-7 mb-5 md:mb-11">
                     Your one-stop agency for creative solutions, cutting-edge
                     apps, and impactful branding.
                 </p>
@@ -71,7 +71,7 @@ const socialIcons = [
                 >
                     {
                         navLinks.map((link: any) => (
-                            <li>
+                            <li class="max-md:mx-auto">
                                 <a
                                     href={link.path}
                                     class="text-[#747785] text-base"
@@ -86,7 +86,7 @@ const socialIcons = [
             </div>
             <div class="basis-1/2 pr-4 max-md:py-10">
                 <ul
-                    class="flex gap-x-4 sm:gap-x-6 h-full items-center pl-4 lg:pl-8 xl:pl-16"
+                    class="flex gap-x-4 sm:gap-x-6 max-md:justify-center h-full items-center pl-4 lg:pl-8 xl:pl-16"
                 >
                     {
                         socialIcons.map((icon: any) => (
@@ -101,7 +101,7 @@ const socialIcons = [
             </div>
         </div>
     </div>
-    <p class="text-white text-base mb-5 px-4 md:hidden">
+    <p class="text-white text-base mb-5 px-4 md:hidden max-md:text-center">
         © {new Date().getFullYear().toString()} ErakCode™. All rights reserved.
     </p>
 </section>

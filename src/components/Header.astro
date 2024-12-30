@@ -27,7 +27,7 @@ const { navLinks } = Astro.props
                         <li>
                             <a
                                 href={link.path}
-                                class={`nav-link text-[#747785] text-sm`}
+                                class={`nav-link text-[#747785] text-sm hover:text-white hover:font-semibold`}
                             >
                                 {link.name}
                             </a>
@@ -36,9 +36,13 @@ const { navLinks } = Astro.props
                 })
             }
         </ul>
-        <div class="max-lg:hidden">
+        <a
+            href="https://calendly.com/vedran1-erak1/30min"
+            target="_blank"
+            class="max-lg:hidden"
+        >
             <BookCallButton />
-        </div>
+        </a>
         <!-- Mobile -->
         <div
             id="hamburger-button"
@@ -59,7 +63,7 @@ const { navLinks } = Astro.props
                     id="hamburger-close-menu"
                     role="button"
                     aria-label="Close Menu"
-					class="mr-[7px] mt-[15px]"
+                    class="mr-[7px] mt-[15px]"
                 >
                     <Image src={x} class={"w-5 h-5"} alt={"close"} />
                 </div>
