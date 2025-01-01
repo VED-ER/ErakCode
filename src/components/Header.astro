@@ -10,10 +10,11 @@ const { navLinks } = Astro.props
 ---
 
 <header
-    class="max-w-screen-2xl mx-auto px-2.5 sm:px-5 fixed z-10 top-0 left-0 right-0"
+    id="header"
+    class="max-w-screen-2xl mx-auto px-2.5 sm:px-5 fixed z-10 top-6 left-0 right-0 transition-all duration-300"
 >
     <nav
-        class="mt-6 w-full flex items-center justify-between py-3 bg-black max-w-[1260px] mx-auto rounded-full bg-gradient-to-br from-[#BBC6FF26] from-0% to-100% to-[#BBC6FF00] shadow-lg"
+        class="w-full flex items-center justify-between py-3 bg-black max-w-[1260px] mx-auto rounded-full bg-gradient-to-br from-[#BBC6FF26] from-0% to-100% to-[#BBC6FF00] shadow-lg"
     >
         <Image
             src={logoWhite}
@@ -97,10 +98,22 @@ const { navLinks } = Astro.props
     </nav>
 
     <script>
+        const header = document.querySelector("#header")
         const hamburgerButton = document.querySelector("#hamburger-button")
         const mobileMenu = document.querySelector("#hamburger-menu")
         const closeMenuBtn = document.querySelector("#hamburger-close-menu")
         const mobileMenuLinks = document.querySelector("#mobile-menu-links")
+
+        document.addEventListener("scroll", (e) => {
+            const scrollPosition = window.scrollY
+            if (scrollPosition > 10) {
+                header?.classList.replace("top-6", "top-3")
+				mobileMenu?.firstElementChild?.classList.add('pt-4')
+            } else {
+				mobileMenu?.firstElementChild?.classList.remove('pt-4')
+                header?.classList.replace("top-3", "top-6")
+            }
+        })
 
         hamburgerButton?.addEventListener("click", () => {
             hamburgerButton.setAttribute("aria-expanded", "true")
