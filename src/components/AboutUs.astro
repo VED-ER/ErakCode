@@ -6,9 +6,9 @@ import ArrowTopRight from "./icons/ArrowTopRight.astro"
 
 <section
     id="about-us"
-    class="bg-[url('/hero.webp')] mt-[20px] sm:mt-[58px] pt-[112px] bg-no-repeat bg-cover max-lg:bg-[right_-150px_bottom] lg:bg-[bottom_200px]"
+    class="md:bg-[url('/hero.webp')] max-lg:bg-cover  bg-no-repeat 2xl:bg-[left_bottom_calc(75%)] lg:bg-cover mt-[20px] sm:mt-[38px] md:mt-[58px] pt-[112px]  lg:bg-[bottom_200px] max-lg:bg-[left_calc(50%)_bottom]"
 >
-    <div class="max-w-[1260px] mx-auto px-4 sm:px-8">
+    <div class="max-w-[1260px] mx-auto px-4 sm:px-8 max-[540px]:pb-[350px] max-[420px]:pb-[330px] max-xs:pb-[300px] max-sm:pb-[430px] max-md:pb-[450px] max-md:bg-[url('/hero.webp')] bg-contain bg-no-repeat bg-bottom">
         <div class="">
             <h1
                 class="font-neuropolitcal text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[110px] text-white leading-[48px] sm:leading-[60px] md:leading-[72px] lg:leading-[96px] xl:leading-[110px] max-w-[416px] sm:max-w-[526px] md:max-w-[626px] lg:max-w-[746px] xl:max-w-[846px]"
@@ -20,7 +20,7 @@ import ArrowTopRight from "./icons/ArrowTopRight.astro"
                     ></span>
                 </span> at a Time
             </h1>
-            <div class="mt-9 flex max-sm:flex-col max-sm:items-start sm:items-center">
+            <div class="mt-9 flex items-center">
                 <Button />
                 <a
                     href="#"
@@ -31,14 +31,18 @@ import ArrowTopRight from "./icons/ArrowTopRight.astro"
                 >
             </div>
         </div>
-        <div class="mt-28 md:mt-40 lg:mt-50 xl:mt-[339px] max-w-[356px]">
+        <div
+            class="mt-8 lg:mt-50 xl:mt-[339px] max-w-[356px]"
+        >
             <p class="text-white text-lg md:text-[20px] leading-9">
                 Your one-stop agency for creative solutions, cutting-edge apps,
                 and impactful branding.
             </p>
         </div>
     </div>
-    <div class="mt-44 py-7 sm:py-14 md:py-[70px] backdrop-blur-xl border-y-[1px] border-y-[#1A1C28]">
+    <div
+        class="md:mt-44 py-7 sm:py-14 md:py-[70px] backdrop-blur-xl border-y-[1px] border-y-[#1A1C28]"
+    >
         <div
             class="max-w-[1260px] mx-auto px-4 sm:px-8 flex max-md:flex-col items-center"
         >
