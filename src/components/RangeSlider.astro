@@ -1,4 +1,11 @@
-<!-- CustomRangeSlider.astro -->
+---
+interface Props {
+    name: string
+}
+
+const { name } = Astro.props
+---
+
 <div class="max-w-xl mx-auto p-6">
     <div class="relative">
         <!-- Range Labels -->
@@ -38,6 +45,7 @@
             </div>
         </div>
     </div>
+    <input type="hidden" name={name} data-slider-value-input />
 </div>
 
 <script is:inline>
@@ -49,6 +57,7 @@
     const sliderHandle = document.getElementById("slider-handle")
     const activeTrack = document.getElementById("active-track")
     const tooltip = document.getElementById("value-tooltip")
+    const valuesInput = document.querySelector("[data-slider-value-input]")
     const track = sliderHandle.parentElement
 
     let currentValue = 50000
@@ -57,6 +66,10 @@
     const formatValue = (value) => value.toLocaleString("en-US")
 
     const roundToStep = (value) => Math.round(value / STEP) * STEP
+
+    const updateValuesInput = (value) => {
+        valuesInput.value = value
+    }
 
     const updateSliderUI = (value) => {
         const percentage = ((value - MIN_VALUE) / VALUE_RANGE) * 100
@@ -68,6 +81,7 @@
         // Update tooltip and ARIA attributes
         tooltip.textContent = `$${formatValue(value)}${value === 100000 ? "+" : ""}`
         sliderHandle.setAttribute("aria-valuenow", value)
+		updateValuesInput(value)
     }
 
     const calculateValue = (positionX) => {
