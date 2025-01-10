@@ -78,6 +78,11 @@ const { options, name, placeholder = "Select options..." } = Astro.props
         }
 
         init() {
+            const form = this.container.closest("form")
+            if (form) {
+                form.addEventListener("reset", () => this.clearSelection())
+            }
+
             this.selectedContainer.addEventListener("click", () => {
                 this.toggleDropdown()
             })
@@ -181,6 +186,26 @@ const { options, name, placeholder = "Select options..." } = Astro.props
             if (newIndex >= options.length) newIndex = 0
 
             this.setActiveOption(newIndex)
+        }
+
+        clearSelection() {
+			this.servicesInput.classList.remove("hidden")
+            const selectedItems =
+                this.selectedContainer.querySelectorAll("[data-value]")
+            selectedItems.forEach((item) => item.remove())
+
+            this.selectedValues.clear()
+
+            this.valuesInput.value = ""
+
+            const options =
+                this.optionsContainer.querySelectorAll("[data-option]")
+            options.forEach((option) => {
+                option.classList.remove("opacity-50")
+                option.setAttribute("aria-selected", "false")
+            })
+
+            this.activeIndex = -1
         }
 
         setActiveOption(index) {
