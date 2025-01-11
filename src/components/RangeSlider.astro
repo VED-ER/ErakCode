@@ -81,7 +81,7 @@ const { name } = Astro.props
         // Update tooltip and ARIA attributes
         tooltip.textContent = `$${formatValue(value)}${value === 100000 ? "+" : ""}`
         sliderHandle.setAttribute("aria-valuenow", value)
-		updateValuesInput(value)
+        updateValuesInput(value)
     }
 
     const calculateValue = (positionX) => {
@@ -185,6 +185,14 @@ const { name } = Astro.props
 
     // Add track click event
     track.addEventListener("click", handleTrackClick)
+
+    const form = sliderHandle.closest("form")
+    if (form) {
+        form.addEventListener("reset", () => {
+            currentValue = 50000
+            updateSliderUI(currentValue)
+        })
+    }
 
     // Initialize slider position
     window.addEventListener("DOMContentLoaded", () =>
