@@ -5,3 +5,11 @@
     font-style: normal;
     font-display: swap;
 }
+
+.swiper-pagination-bullet {
+    @apply !w-2.5 !h-2.5 !mx-1 !bg-white !opacity-50 !rounded-full;
+}
+
+.swiper-pagination-bullet-active {
+    @apply !opacity-100 !bg-primary;
+}
