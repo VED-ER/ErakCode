@@ -14,7 +14,7 @@ const { navLinks } = Astro.props
     class="max-w-screen-2xl mx-auto px-2.5 sm:px-5 fixed z-20 top-6 left-0 right-0 transition-all duration-300"
 >
     <nav
-        class="w-full flex items-center justify-between py-3 bg-black max-w-[1260px] mx-auto rounded-full bg-gradient-to-br from-[#BBC6FF26] from-0% to-100% to-[#BBC6FF00] shadow-lg"
+        class="w-full flex items-center justify-between py-3 lg:py-1 bg-black max-w-[1260px] mx-auto rounded-full bg-gradient-to-br from-[#BBC6FF26] from-0% to-100% to-[#BBC6FF00] shadow-lg"
     >
         <Image
             src={logoWhite}
@@ -40,9 +40,9 @@ const { navLinks } = Astro.props
         <a
             href="https://calendly.com/vedran1-erak1/30min"
             target="_blank"
-            class="max-lg:hidden"
+            class="max-lg:hidden hover:bg-white group hover:text-[#000102] py-2 pl-2.5 rounded-[30px] transition-all duration-300"
         >
-            <BookCallButton />
+            <BookCallButton classList="group-hover:text-[#000102]" />
         </a>
         <!-- Mobile -->
         <div
@@ -108,9 +108,9 @@ const { navLinks } = Astro.props
             const scrollPosition = window.scrollY
             if (scrollPosition > 10) {
                 header?.classList.replace("top-6", "top-3")
-				mobileMenu?.firstElementChild?.classList.add('pt-4')
+                mobileMenu?.firstElementChild?.classList.add("pt-4")
             } else {
-				mobileMenu?.firstElementChild?.classList.remove('pt-4')
+                mobileMenu?.firstElementChild?.classList.remove("pt-4")
                 header?.classList.replace("top-3", "top-6")
             }
         })
