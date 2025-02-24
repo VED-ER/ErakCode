@@ -6,20 +6,8 @@ interface Props {
 const { name } = Astro.props
 ---
 
-<div class="max-w-xl mx-auto p-6">
+<div class="max-w-xl mx-auto py-6">
     <div class="relative">
-        <!-- Range Labels -->
-        <div class="flex justify-between mb-2">
-            <span
-                class="text-[20px] font-medium text-white text-opacity-50 select-none"
-                >$100</span
-            >
-            <span
-                class="text-[20px] font-medium text-white text-opacity-50 select-none"
-                >$100k</span
-            >
-        </div>
-
         <!-- Range Track -->
         <div class="relative h-2 bg-gray-200 bg-opacity-20 rounded-full">
             <!-- Active Track -->
@@ -43,6 +31,17 @@ const { name } = Astro.props
                 >
                 </div>
             </div>
+        </div>
+        <!-- Range Labels -->
+        <div class="flex justify-between mt-2">
+            <span
+                class="text-[20px] font-medium text-white text-opacity-50 select-none"
+                >$100</span
+            >
+            <span
+                class="text-[20px] font-medium text-white text-opacity-50 select-none"
+                >$100k</span
+            >
         </div>
     </div>
     <input type="hidden" name={name} data-slider-value-input />
