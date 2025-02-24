@@ -45,17 +45,18 @@ const PORTFOLIO = [
                         >
                             {PORTFOLIO[0].title}
                         </h3>
-                        <h6
+                        <h4
                             id="portfolio-subtitle-txt"
                             class="text-white text-base transition-all duration-300 ease-in-out"
                         >
                             {PORTFOLIO[0].subtitle}
-                        </h6>
+                        </h4>
                     </div>
                     <div class="flex gap-x-4">
                         <div
                             id="prev-portfolio-btn"
                             role="button"
+                            aria-label="Previous Portfolio"
                             class="text-white hover:text-black hover:bg-white transition bg-transparent border border-white rounded-full p-5"
                         >
                             <ArrowLeft />
@@ -63,6 +64,7 @@ const PORTFOLIO = [
                         <div
                             id="next-portfolio-btn"
                             role="button"
+                            aria-label="Next Portfolio"
                             class="text-white hover:text-black hover:bg-white transition bg-transparent border border-white rounded-full p-5"
                         >
                             <ArrowRight />

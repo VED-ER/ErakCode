@@ -97,15 +97,15 @@ const socialIcons = [
                 >
                     {
                         socialIcons.map((icon: any) => (
-                            <a
-                                href={icon.link}
-                                class="text-white"
-                                aria-label="Social"
-                            >
-                                <li class="w-[40px] h-[40px] flex items-center justify-center xs:w-[60px] xs:h-[60px] bg-transparent border hover:bg-primary hover:border-primary transition duration-300 border-[#1A1C28] rounded-full">
+                            <li class="w-[40px] h-[40px] flex items-center justify-center xs:w-[60px] xs:h-[60px] bg-transparent border hover:bg-primary hover:border-primary transition duration-300 border-[#1A1C28] rounded-full">
+                                <a
+                                    href={icon.link}
+                                    class="text-white"
+                                    aria-label="Social"
+                                >
                                     <icon.Icon />
-                                </li>
-                            </a>
+                                </a>
+                            </li>
                         ))
                     }
                 </ul>
