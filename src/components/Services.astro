@@ -80,13 +80,19 @@ const SERVICES = [
 
 <section id="services">
     <div>
-        <div class="my-[35px] sm:my-[50px] md:my-[70px] lg:my-[90px] text-center">
+        <div
+            class="my-[35px] sm:my-[50px] md:my-[70px] lg:my-[90px] text-center"
+        >
             <SectionHeading title="Our Expertise" />
         </div>
-        <div class="max-w-[1248px] px-4 mx-auto grid grid-cols-1 md:grid-cols-12 gap-8">
+        <div
+            class="max-w-[1248px] px-4 mx-auto grid grid-cols-1 md:grid-cols-12 gap-8"
+        >
             {
                 SERVICES.map((service, index) => (
-                    <a href="#contact"
+                    <a
+                        href="#contact"
+                        aria-label="Contact Us"
                         class={`${
                             index % 4 === 0 || index % 4 === 3
                                 ? "col-span-1 md:col-span-6 lg:col-span-5"

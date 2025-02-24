@@ -1,8 +1,14 @@
 ---
-const { text = "Get a Quote", href = "#contact", className } = Astro.props
+const {
+    text = "Get a Quote",
+    href = "#contact",
+    ariaLabel = "Get a Quote",
+    className,
+} = Astro.props
 ---
 
 <a
+    aria-label={ariaLabel}
     class={`inline-block px-5 sm:px-[38px] py-4 sm:py-5 bg-primary text-white text-sm font-neuropolitcal rounded-full shadow-md hover:bg-white hover:text-primary focus:outline-none focus:ring-2 focus:ring-white transition ${className}`}
     href={href}
 >

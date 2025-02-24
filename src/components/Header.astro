@@ -29,6 +29,7 @@ const { navLinks } = Astro.props
                             <a
                                 href={link.path}
                                 class={`nav-link text-[#747785] text-sm hover:text-white hover:font-semibold`}
+                                aria-label={link.alt}
                             >
                                 {link.name}
                             </a>
@@ -41,6 +42,7 @@ const { navLinks } = Astro.props
             href="https://calendly.com/vedran1-erak1/30min"
             target="_blank"
             class="max-lg:hidden group py-2 pl-2.5 rounded-[30px]"
+            aria-label="Book a call"
         >
             <BookCallButton classList="text-[#747785] group-hover:text-white" />
         </a>
@@ -79,6 +81,7 @@ const { navLinks } = Astro.props
                             <a
                                 href={link.path}
                                 class="text-white text-base p-2"
+                                aria-label={link.alt}
                             >
                                 {link.name}
                             </a>
@@ -89,10 +92,11 @@ const { navLinks } = Astro.props
                     href="https://calendly.com/vedran1-erak1/30min"
                     target="_blank"
                     class="text-white text-base p-2"
+                    aria-label="Book a call"
                 >
                     Book a call
                 </a>
-                <Button className="py-5 px-10" />
+                <Button className="py-5 px-10" ariaLabel="Get a Quote" />
             </div>
         </div>
     </nav>
