@@ -79,7 +79,8 @@ const PORTFOLIO = [
                     <Image
                         src={p.img}
                         data-carousel-item
-                        alt={"portfolio 1"}
+                        alt={`portfolio ${index + 1}`}
+                        loading={"eager"}
                         class={`${index !== 0 ? "hidden opacity-0" : "block"} object-cover w-full h-full object-left transition-all duration-300 ease-in-out`}
                     />
                 ))
