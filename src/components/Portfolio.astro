@@ -2,31 +2,50 @@
 import ArrowLeft from "@components/icons/ArrowLeft.astro"
 import ArrowRight from "@components/icons/ArrowRight.astro"
 import { Image } from "astro:assets"
-import portfolio1 from "@assets/portfolio-1.png"
-import portfolio2 from "@assets/portfolio-2.png"
-import portfolio3 from "@assets/portfolio-3.png"
+import dinVentures from "@assets/portfolio/din-ventures.webp"
+import innerBalanceWatch from "@assets/portfolio/inner-balance-watch.webp"
+import stayUpHighway from "@assets/portfolio/stay-up-highway.webp"
+import dometrain from "@assets/portfolio/dometrain.webp"
+import j from "@assets/portfolio/j.webp"
+import pixel from "@assets/portfolio/pixel.webp"
+
 const PORTFOLIO = [
     {
         title: "Logo design",
         subtitle: "Din Ventures",
-        img: portfolio1,
+        img: dinVentures,
     },
     {
-        title: "Logo design",
-        subtitle: "Inner Balance Watch",
-        img: portfolio2,
-    },
-    {
-        title: "Logo design",
+        title: "Web design",
         subtitle: "STAYUPHIGHWAY",
-        img: portfolio3,
+        img: stayUpHighway,
+    },
+    {
+        title: "Web design",
+        subtitle: "Inner Balance Watch",
+        img: innerBalanceWatch,
+    },
+    {
+        title: "Web design",
+        subtitle: "Dometrain courses",
+        img: dometrain,
+    },
+    {
+        title: "Web design",
+        subtitle: "Pixel Photography",
+        img: pixel,
+    },
+    {
+        title: "App Development",
+        subtitle: "Jedox",
+        img: j,
     },
 ]
 ---
 
 <section id="portfolio" class="mt-[132px]">
     <div class="grid grid-cols-1 lg:grid-cols-2">
-        <div class="bg-[#D0D2DE] lg:my-8 xl:my-10 2xl:my-12 flex">
+        <div class="bg-[#D0D2DE] lg:my-8 xl:my-10 2xl:my-[54px] flex">
             <div
                 class="max-w-[553px] py-10 sm:py-[60px] md:py-[80px] lg:py-[100px] flex flex-col my-auto w-full pl-4 ml-auto"
             >
