@@ -8,37 +8,49 @@ import stayUpHighway from "@assets/portfolio/stay-up-highway.webp"
 import dometrain from "@assets/portfolio/dometrain.webp"
 import j from "@assets/portfolio/j.webp"
 import pixel from "@assets/portfolio/pixel.webp"
+import dinVenturesMobile from "@assets/portfolio/din-ventures-mobile.webp"
+import innerBalanceWatchMobile from "@assets/portfolio/inner-balance-watch-mobile.webp"
+import stayUpHighwayMobile from "@assets/portfolio/stay-up-highway-mobile.webp"
+import dometrainMobile from "@assets/portfolio/dometrain-mobile.webp"
+import jMobile from "@assets/portfolio/j-mobile.webp"
+import pixelMobile from "@assets/portfolio/pixel-mobile.webp"
 
 const PORTFOLIO = [
     {
         title: "Logo design",
         subtitle: "Din Ventures",
         img: dinVentures,
+        mobileImg: dinVenturesMobile,
     },
     {
         title: "Web design",
         subtitle: "STAYUPHIGHWAY",
         img: stayUpHighway,
+        mobileImg: stayUpHighwayMobile,
     },
     {
         title: "Web design",
         subtitle: "Inner Balance Watch",
         img: innerBalanceWatch,
+        mobileImg: innerBalanceWatchMobile,
     },
     {
         title: "Web design",
         subtitle: "Dometrain courses",
         img: dometrain,
+        mobileImg: dometrainMobile,
     },
     {
         title: "Web design",
         subtitle: "Pixel Photography",
         img: pixel,
+        mobileImg: pixelMobile,
     },
     {
         title: "Mobile App",
         subtitle: "Jedox",
         img: j,
+        mobileImg: jMobile,
     },
 ]
 ---
@@ -71,7 +83,7 @@ const PORTFOLIO = [
                             {PORTFOLIO[0].subtitle}
                         </h4>
                     </div>
-                    <div class="flex gap-x-4">
+                    <div class="flex gap-x-4 max-md:hidden">
                         <div
                             id="prev-portfolio-btn"
                             role="button"
@@ -100,10 +112,41 @@ const PORTFOLIO = [
                         data-carousel-item
                         alt={`portfolio ${index + 1}`}
                         loading={"eager"}
-                        class={`${index !== 0 ? "hidden opacity-0" : "block"} object-cover w-full h-full object-left transition-all duration-300 ease-in-out`}
+                        class={`${index !== 0 ? "hidden opacity-0" : "block"} max-md:hidden object-cover w-full h-full object-left transition-all duration-300 ease-in-out`}
                     />
                 ))
             }
+        </div>
+        <div class="bg-[#D0D2DE] pr-6">
+            {
+                PORTFOLIO.map((p, index) => (
+                    <Image
+                        src={p.mobileImg}
+                        data-mobile-carousel-item
+                        alt={`portfolio ${index + 1}`}
+                        loading={"eager"}
+                        class={`${index !== 0 ? "hidden opacity-0" : "block"} -mt-[120px] rounded-r-3xl md:hidden object-cover w-full h-full object-left transition-all duration-300 ease-in-out`}
+                    />
+                ))
+            }
+            <div class="flex gap-x-4 md:hidden justify-end mt-[18px]">
+                <div
+                    id="prev-portfolio-btn-mobile"
+                    role="button"
+                    aria-label="Previous Portfolio"
+                    class="text-black hover:text-white hover:bg-black transition bg-transparent border border-black rounded-full p-5"
+                >
+                    <ArrowLeft />
+                </div>
+                <div
+                    id="next-portfolio-btn-mobile"
+                    role="button"
+                    aria-label="Next Portfolio"
+                    class="text-black hover:text-white hover:bg-black transition bg-transparent border border-black rounded-full p-5"
+                >
+                    <ArrowRight />
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -112,13 +155,23 @@ const PORTFOLIO = [
     let currentIndex = 0
 
     const carouselItems = document.querySelectorAll("[data-carousel-item]")
+    const carouselItemsMobile = document.querySelectorAll(
+        "[data-mobile-carousel-item]"
+    )
     const titleTxt = document.getElementById("portfolio-title-txt")
     const subtitleTxt = document.getElementById("portfolio-subtitle-txt")
     const nextButton = document.getElementById("next-portfolio-btn")
+    const nextButtonMobile = document.getElementById(
+        "next-portfolio-btn-mobile"
+    )
     const prevButton = document.getElementById("prev-portfolio-btn")
+    const prevButtonMobile = document.getElementById(
+        "prev-portfolio-btn-mobile"
+    )
 
     function updateContent(newIndex) {
         carouselItems[currentIndex].classList.add("opacity-0")
+        carouselItemsMobile[currentIndex].classList.add("opacity-0")
 
         titleTxt.classList.add("opacity-0")
         subtitleTxt.classList.add("opacity-0")
@@ -126,17 +179,22 @@ const PORTFOLIO = [
         setTimeout(() => {
             carouselItems[currentIndex].classList.remove("block")
             carouselItems[currentIndex].classList.add("hidden")
+            carouselItemsMobile[currentIndex].classList.remove("block")
+            carouselItemsMobile[currentIndex].classList.add("hidden")
 
             currentIndex = newIndex
 
             carouselItems[currentIndex].classList.remove("hidden")
             carouselItems[currentIndex].classList.add("block")
+            carouselItemsMobile[currentIndex].classList.remove("hidden")
+            carouselItemsMobile[currentIndex].classList.add("block")
 
             titleTxt.textContent = PORTFOLIO[currentIndex].title
             subtitleTxt.textContent = PORTFOLIO[currentIndex].subtitle
 
             setTimeout(() => {
                 carouselItems[currentIndex].classList.remove("opacity-0")
+                carouselItemsMobile[currentIndex].classList.remove("opacity-0")
                 titleTxt.classList.remove("opacity-0")
                 subtitleTxt.classList.remove("opacity-0")
             }, 50)
@@ -149,6 +207,17 @@ const PORTFOLIO = [
     })
 
     prevButton.addEventListener("click", () => {
+        const newIndex =
+            (currentIndex - 1 + PORTFOLIO.length) % PORTFOLIO.length
+        updateContent(newIndex)
+    })
+
+    nextButtonMobile.addEventListener("click", () => {
+        const newIndex = (currentIndex + 1) % PORTFOLIO.length
+        updateContent(newIndex)
+    })
+
+    prevButtonMobile.addEventListener("click", () => {
         const newIndex =
             (currentIndex - 1 + PORTFOLIO.length) % PORTFOLIO.length
         updateContent(newIndex)
