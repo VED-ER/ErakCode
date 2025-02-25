@@ -1,23 +1,37 @@
 ---
 import SectionHeading from "./SectionHeading.astro"
 import { Image } from "astro:assets"
-import team1 from "@assets/team-1.png"
+import vedran from "@assets/vedran.png"
+import sergej from "@assets/sergej.png"
+import luka from "@assets/luka.png"
+import teodora from "@assets/teodora.png"
+import zorica from "@assets/zorica.png"
 
 const TEAM = [
     {
         name: "Vedran Erak",
         title: "Founder & Fullstack Developer",
-        img: team1,
+        img: vedran,
     },
     {
         name: "Sergej Sovilj",
-        title: "UI & UX Designer",
-        img: team1,
+        title: "Design Team Lead",
+        img: sergej,
     },
     {
-        name: "Vedran Erak",
-        title: "Founder & Fullstack Developer",
-        img: team1,
+        name: "Luka Lajić",
+        title: "Branding & Motion Designer",
+        img: luka,
+    },
+    {
+        name: "Teodora Mutić",
+        title: "UX/UI Designer",
+        img: teodora,
+    },
+    {
+        name: "Zorica Petreš",
+        title: "UX/UI Designer",
+        img: zorica,
     },
 ]
 ---
@@ -35,9 +49,9 @@ const TEAM = [
                 TEAM.map((t, index) => (
                     <div class="swiper-slide px-4 bg-background">
                         <div
-                            class={`max-sm:max-h-[570px] items-center max-w-[330px] sm:max-w-sm mx-auto flex-col bg-gradient-to-b from-[#BBC6FF1A] to-[#BBC6FF00] from-0% to-100% rounded-full overflow-hidden text-center group hover:bg-[#E1E1E1] transition duration-300 group-hover:bg-none`}
+                            class={`h-[620px] md:h-[686px] lg:h-[686px] xl:h-[746px] items-center max-w-[330px] sm:max-w-sm mx-auto flex flex-col bg-gradient-to-b from-[#BBC6FF1A] to-[#BBC6FF00] from-0% to-100% rounded-full relative ${(index + 1) % 2 === 0 ? "lg:mt-[120px]" : ""} overflow-hidden text-center group hover:bg-[#E1E1E1] transition duration-300 group-hover:bg-none`}
                         >
-                            <div class="mt-16 md:mt-20 px-2">
+                            <div class="mt-16 md:mt-20 px-2 absolute left-0 right-0">
                                 <h5 class="text-xl md:text-2xl lg:text-[26px] text-white group-hover:text-[#000102] font-neuropolitcal">
                                     {t.name}
                                 </h5>
@@ -48,7 +62,7 @@ const TEAM = [
                             <Image
                                 src={t.img}
                                 alt={"team"}
-                                class="mx-auto object-cover w-full"
+                                class="mx-auto mt-auto object-cover w-full"
                             />
                         </div>
                     </div>
