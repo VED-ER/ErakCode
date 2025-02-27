@@ -152,17 +152,6 @@ const PORTFOLIO = [
 </section>
 
 <script is:inline define:vars={{ PORTFOLIO }}>
-    document.addEventListener("DOMContentLoaded", function () {
-        const mobileCarouselImages = document.querySelectorAll(
-            "[data-mobile-carousel-item]"
-        )
-
-        mobileCarouselImages.forEach((img, index) => {
-            if (index === 0) return
-
-            img.src = img.dataset.src
-        })
-    })
     let currentIndex = 0
 
     const carouselItems = document.querySelectorAll("[data-carousel-item]")
