@@ -13,3 +13,7 @@
 .swiper-pagination-bullet-active {
     @apply !opacity-100 !bg-primary;
 }
+
+.fadein-anim {
+    @apply opacity-0;
+}

@@ -55,11 +55,11 @@ const PORTFOLIO = [
 ]
 ---
 
-<section id="portfolio" class="mt-[132px] opacity-0">
+<section id="portfolio" class="mt-[132px]">
     <div class="grid grid-cols-1 lg:grid-cols-2">
         <div class="bg-[#D0D2DE] lg:my-8 xl:my-10 2xl:my-[54px] flex">
             <div
-                class="max-w-[553px] py-10 sm:py-[60px] md:py-[80px] lg:py-[100px] flex flex-col my-auto w-full pl-4 ml-auto"
+                class="max-w-[553px] fadein-anim py-10 sm:py-[60px] md:py-[80px] lg:py-[100px] flex flex-col my-auto w-full pl-4 ml-auto"
             >
                 <h2
                     class="text-[#000102] font-neuropolitcal text-5xl sm:text-6xl md:text-7xl lg:text-[84px] leading-[48px] sm:leading-[60px] md:leading-[72px] lg:leading-[84px]"
@@ -104,7 +104,7 @@ const PORTFOLIO = [
                 </div>
             </div>
         </div>
-        <div>
+        <div class="fadein-anim">
             {
                 PORTFOLIO.map((p, index) => (
                     <Image

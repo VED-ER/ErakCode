@@ -111,6 +111,7 @@ const navLinks = [
     document.addEventListener("DOMContentLoaded", () => {
         const sections = document.querySelectorAll("section")
         const navLinks = document.querySelectorAll(".nav-link")
+        const fadeInElements = document.querySelectorAll(".fadein-anim")
 
         const observerOptions = {
             root: null,
@@ -133,17 +134,21 @@ const navLinks = [
             })
         }, observerOptions)
 
-        const fadeInObserver = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add("animate-fadeIn")
-                    entry.target.classList.remove("opacity-0")
-                    fadeInObserver.unobserve(entry.target)
-                }
-            })
-        })
+        const fadeInObserver = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("animate-fadeIn")
+                        entry.target.classList.remove("opacity-0")
+                        entry.target.classList.remove("fadein-anim")
+                        fadeInObserver.unobserve(entry.target)
+                    }
+                })
+            },
+            { threshold: 0.2 }
+        )
 
         sections.forEach((section) => observer.observe(section))
-        sections.forEach((section) => fadeInObserver.observe(section))
+        fadeInElements.forEach((section) => fadeInObserver.observe(section))
     })
 </script>

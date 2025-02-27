@@ -17,7 +17,7 @@ const servicesOptions = [
 ]
 ---
 
-<section id="contact" class="mt-10 opacity-0">
+<section id="contact" class="mt-10">
     <div
         class="bg-gradient-to-br from-[#BBC6FF1A] to-[#BBC6FF00] from-0% to-100%"
     >
@@ -25,20 +25,20 @@ const servicesOptions = [
             class="flex justify-center max-md:flex-col md:gap-x-6 lg:gap-x-14 xl:gap-x-20"
         >
             <div
-                class="basis-1/2 bg-[url('/logo-bg.webp')] bg-no-repeat bg-[left_25px_top_55px] md:bg-[right_25px_top_115px] bg-contain md:bg-auto"
+                class="basis-1/2 fadein-anim bg-[url('/logo-bg.webp')] bg-no-repeat bg-[left_25px_top_55px] md:bg-[right_25px_top_115px] bg-contain md:bg-auto"
             >
                 <div
                     class="ml-auto md:max-w-[634px] pl-4 md:pl-7 lg:pl-14 xl:pl-20 py-4 md:py-6 lg:py-12 xl:py-16"
                 >
                     <div class="mt-[125px]">
                         <h2
-                            class="font-neuropolitcal text-[54px] md:text-[64px] lg:text-[74px] xl:text-[84px] text-white leading-[64px] md:leading-[74px] lg:leading-[84px] xl:leading-[94px]"
+                            class="font-neuropolitcal fadein-anim text-[54px] md:text-[64px] lg:text-[74px] xl:text-[84px] text-white leading-[64px] md:leading-[74px] lg:leading-[84px] xl:leading-[94px]"
                         >
                             Let's Get in Touch
                         </h2>
 
                         <a
-                            class="inline-block group max-w-[340px] w-5/6 md:w-5/6 lg:w-3/4 xl:w-2/3 mt-11 bg-[#000102] hover:bg-white py-8 px-5 md:px-6 lg:px-9 rounded-[30px] transition duration-300"
+                            class="inline-block fadein-anim group max-w-[340px] w-5/6 md:w-5/6 lg:w-3/4 xl:w-2/3 mt-11 bg-[#000102] hover:bg-white py-8 px-5 md:px-6 lg:px-9 rounded-[30px] transition duration-300"
                             href="https://calendly.com/vedran1-erak1/30min"
                             target="_blank"
                             aria-label="Book a call"
@@ -68,7 +68,7 @@ const servicesOptions = [
                     class="md:max-w-[634px] pr-4 max-md:pl-4 md:pr-7 lg:pr-14 xl:pr-20 py-4 md:py-6 lg:py-12 xl:py-16"
                 >
                     <form id="contact-form">
-                        <div class="">
+                        <div class="fadein-anim">
                             <label
                                 for="name"
                                 class="block text-sm text-[#747785] mb-2"
@@ -83,7 +83,7 @@ const servicesOptions = [
                                 placeholder="Enter your name"
                             />
                         </div>
-                        <div class="mt-[18px]">
+                        <div class="mt-[18px] fadein-anim">
                             <label
                                 for="email"
                                 class="block text-sm text-[#747785] mb-2"
@@ -98,7 +98,7 @@ const servicesOptions = [
                                 placeholder="Enter your e-mail"
                             />
                         </div>
-                        <div class="mt-[18px]">
+                        <div class="mt-[18px] fadein-anim">
                             <label
                                 for="required-service"
                                 class="block text-sm text-[#747785] mb-2"
@@ -111,7 +111,7 @@ const servicesOptions = [
                                 placeholder="Select required services..."
                             />
                         </div>
-                        <div class="mt-[18px]">
+                        <div class="mt-[18px] fadein-anim">
                             <label
                                 for="message"
                                 class="block text-sm text-[#747785] mb-2"
@@ -126,7 +126,7 @@ const servicesOptions = [
                                 placeholder="Enter your project name and description"
                             ></textarea>
                         </div>
-                        <div class="mt-[18px]">
+                        <div class="mt-[18px] fadein-anim">
                             <label
                                 for="budget"
                                 class="block text-sm text-[#747785] mb-4"
@@ -135,14 +135,14 @@ const servicesOptions = [
                             <RangeSlider name="budget" />
                         </div>
                         <div
-                            class="g-recaptcha mt-[18px] mb-12"
+                            class="g-recaptcha mt-[18px] mb-12 fadein-anim"
                             data-sitekey="6LeLfKsqAAAAAEwHe-Kxs5e3vHnai-PJ_zZDrYwA"
                         >
                         </div>
                         <button
                             id="contact-form-submit-btn"
                             type="submit"
-                            class="bg-primary hover:bg-white outline-white w-full rounded-full transition duration-300 font-neuropolitcal text-[20px] py-5 text-white hover:text-primary text-center"
+                            class="bg-primary fadein-anim hover:bg-white outline-white w-full rounded-full transition duration-300 font-neuropolitcal text-[20px] py-5 text-white hover:text-primary text-center"
                             aria-label="Submit">Submit</button
                         >
                         <div id="sendingStatus" class="hidden">
