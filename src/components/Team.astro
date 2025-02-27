@@ -1,11 +1,11 @@
 ---
 import SectionHeading from "./SectionHeading.astro"
 import { Image } from "astro:assets"
-import vedran from "@assets/team/vedran.webp"
-import sergej from "@assets/team/sergej.webp"
-import luka from "@assets/team/luka.webp"
-import teodora from "@assets/team/teodora.webp"
-import zorica from "@assets/team/zorica.webp"
+import vedran from "@assets/team/vedran.png"
+import sergej from "@assets/team/sergej.png"
+import luka from "@assets/team/luka.png"
+import teodora from "@assets/team/teodora.png"
+import zorica from "@assets/team/zorica.png"
 
 const TEAM = [
     {
@@ -49,7 +49,7 @@ const TEAM = [
                 TEAM.map((t, index) => (
                     <div class="swiper-slide px-4 ">
                         <div
-                            class={`h-[620px] md:h-[686px] lg:h-[686px] xl:h-[746px] items-center max-w-[330px] sm:max-w-sm mx-auto flex flex-col bg-gradient-to-b from-[#BBC6FF1A] to-[#BBC6FF00] from-0% to-100% rounded-full relative ${(index + 1) % 2 === 0 ? "lg:mt-[120px]" : ""} overflow-hidden text-center bg-[#E1E1E1]`}
+                            class={`h-[620px] md:h-[686px] lg:h-[686px] xl:h-[746px] items-center max-w-[330px] sm:max-w-sm mx-auto flex flex-col bg-gradient-to-b from-[#BBC6FF1A] to-[#BBC6FF00] from-0% to-100% rounded-full relative ${(index + 1) % 2 === 0 ? "lg:mt-[120px]" : ""} overflow-hidden text-center bg-[#E1E1E1] outline-8 outline-background -outline-offset-1 outline-double`}
                         >
                             <div class="mt-16 md:mt-20 px-2 absolute left-0 right-0">
                                 <h5 class="text-xl md:text-2xl lg:text-[26px] text-[#000102] font-neuropolitcal">
@@ -62,6 +62,7 @@ const TEAM = [
                             <Image
                                 src={t.img}
                                 alt={"team"}
+                                format="png"
                                 class="mx-auto mt-auto object-cover w-full"
                             />
                         </div>

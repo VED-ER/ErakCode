@@ -125,7 +125,7 @@ const PORTFOLIO = [
                         src={p.mobileImg}
                         data-mobile-carousel-item
                         alt={`portfolio ${index + 1}`}
-                        loading={"eager"}
+                        loading={index === 0 ? "eager" : "lazy"}
                         format="png"
                         class={`${index !== 0 ? "hidden opacity-0" : "block"} -mt-[120px] rounded-r-3xl min-w-[372px] min-h-[448px] md:hidden object-cover w-full h-full object-bottom transition-all duration-300 ease-in-out`}
                     />
