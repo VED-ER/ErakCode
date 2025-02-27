@@ -1,4 +1,7 @@
 ---
+import { Image } from "astro:assets"
+import sergejAvatar from "@assets/sergej-avatar.png"
+import vedranAvatar from "@assets/vedran-avatar.png"
 const { classList } = Astro.props
 ---
 
@@ -6,14 +9,19 @@ const { classList } = Astro.props
     class={`mr-[18px] flex font-neuropolitcal text-sm items-center justify-center gap-x-5 ${classList}`}
 >
     Book a call <div class="flex">
-        <img
-            src={"/vedran-avatar.png"}
-            alt={"avatar"}
+        <Image
+            src={vedranAvatar}
+            alt={`Vedran avatar`}
+            loading={"eager"}
+            format="png"
             class={"w-11 h-11 rounded-full border-2 border-[#090A0E] bg-[#D6E0E2]"}
-        /><img
-            src={"/sergej-avatar.png"}
-            alt={"avatar"}
-            class={`-ml-2.5 w-11 h-11 border-2 border-[#090A0E] bg-[#D6E0E2] rounded-full `}
+        />
+        <Image
+            src={sergejAvatar}
+            alt={`Sergej avatar`}
+            loading={"eager"}
+            format="png"
+            class={"-ml-2.5 w-11 h-11 border-2 border-[#090A0E] bg-[#D6E0E2] rounded-full "}
         />
     </div>
 </div>
