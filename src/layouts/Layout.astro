@@ -104,9 +104,6 @@ const navLinks = [
         <Team />
         <ContactForm />
         <Footer navLinks={navLinks} />
-        <!-- <script>
-import "../scripts/menu.js";
-</script> -->
     </body>
 </html>
 
@@ -136,6 +133,17 @@ import "../scripts/menu.js";
             })
         }, observerOptions)
 
+        const fadeInObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("animate-fadeIn")
+                    entry.target.classList.remove("opacity-0")
+                    fadeInObserver.unobserve(entry.target)
+                }
+            })
+        })
+
         sections.forEach((section) => observer.observe(section))
+        sections.forEach((section) => fadeInObserver.observe(section))
     })
 </script>

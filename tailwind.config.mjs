@@ -18,6 +18,15 @@ export default {
                 "2xl": "1440px",
                 "3xl": "1536px",
             },
+            animation: {
+                fadeIn: "fadeIn 1s ease-out ",
+            },
+            keyframes: {
+                fadeIn: {
+                    "0%": { opacity: 0 },
+                    "100%": { opacity: 1 },
+                },
+            },
         },
     },
     plugins: [],
