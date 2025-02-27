@@ -21,36 +21,42 @@ const PORTFOLIO = [
         subtitle: "Din Ventures",
         img: dinVentures,
         mobileImg: dinVenturesMobile,
+        mobileUrl: "src/assets/portfolio/din-ventures-mobile.png",
     },
     {
         title: "Web design",
         subtitle: "STAYUPHIGHWAY",
         img: stayUpHighway,
         mobileImg: stayUpHighwayMobile,
+        mobileUrl: "src/assets/portfolio/stay-up-highway-mobile.png",
     },
     {
         title: "Web design",
         subtitle: "Inner Balance Watch",
         img: innerBalanceWatch,
         mobileImg: innerBalanceWatchMobile,
+        mobileUrl: "src/assets/portfolio/inner-balance-watch-mobile.png",
     },
     {
         title: "Web design",
         subtitle: "Dometrain courses",
         img: dometrain,
         mobileImg: dometrainMobile,
+        mobileUrl: "src/assets/portfolio/dometrain-mobile.png",
     },
     {
         title: "Web design",
         subtitle: "Pixel Photography",
         img: pixel,
         mobileImg: pixelMobile,
+        mobileUrl: "src/assets/portfolio/pixel-mobile.png",
     },
     {
         title: "Mobile App",
         subtitle: "Jedox",
         img: j,
         mobileImg: jMobile,
+        mobileUrl: "src/assets/portfolio/j-mobile.png",
     },
 ]
 ---
@@ -121,14 +127,21 @@ const PORTFOLIO = [
         <div class="bg-[#D0D2DE] pr-10">
             {
                 PORTFOLIO.map((p, index) => (
-                    <Image
-                        src={p.mobileImg}
+                    <img
+                        src={index === 0 ? p.mobileUrl : undefined}
+                        data-src={p.mobileUrl}
                         data-mobile-carousel-item
                         alt={`portfolio ${index + 1}`}
-                        loading={index === 0 ? "eager" : "lazy"}
-                        format="png"
                         class={`${index !== 0 ? "hidden opacity-0" : "block"} -mt-[120px] rounded-r-3xl min-w-[372px] min-h-[448px] md:hidden object-cover w-full h-full object-bottom transition-all duration-300 ease-in-out`}
                     />
+                    // <Image
+                    //     src={p.mobileImg}
+                    //     data-mobile-carousel-item
+                    //     alt={`portfolio ${index + 1}`}
+                    //     loading={index === 0 ? "eager" : "lazy"}
+                    //     format="png"
+                    //     class={`${index !== 0 ? "hidden opacity-0" : "block"} -mt-[120px] rounded-r-3xl min-w-[372px] min-h-[448px] md:hidden object-cover w-full h-full object-bottom transition-all duration-300 ease-in-out`}
+                    // />
                 ))
             }
             <div class="flex gap-x-4 md:hidden justify-end mt-[18px] mb-2">
@@ -154,6 +167,17 @@ const PORTFOLIO = [
 </section>
 
 <script is:inline define:vars={{ PORTFOLIO }}>
+    document.addEventListener("DOMContentLoaded", function () {
+        const mobileCarouselImages = document.querySelectorAll(
+            "[data-mobile-carousel-item]"
+        )
+
+        mobileCarouselImages.forEach((img, index) => {
+            if (index === 0) return
+
+            img.src = img.dataset.src
+        })
+    })
     let currentIndex = 0
 
     const carouselItems = document.querySelectorAll("[data-carousel-item]")
