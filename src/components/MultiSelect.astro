@@ -84,7 +84,7 @@ const { options, name, placeholder = "Select options..." } = Astro.props
             }
 
             this.selectedContainer.addEventListener("click", () => {
-                this.toggleDropdown()
+                this.selectedContainer.focus()
             })
 
             this.selectedContainer.addEventListener("focus", (e) => {
