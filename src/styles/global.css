@@ -17,3 +17,22 @@
 .fadein-anim {
     @apply opacity-0;
 }
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 3px;
+    border-radius: 2px;
+}
+
+::-webkit-scrollbar-track {
+    background: #111111;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555555;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #333333;
+    border-radius: 50px;
+}

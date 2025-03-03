@@ -25,6 +25,7 @@ const { options, name, placeholder = "Select options..." } = Astro.props
             class="outline-none di placeholder-[#262831] pointer-events-none border-none text-[18px] w-[calc(100%-50px)] rounded-2xl bg-transparent cursor-pointer"
             placeholder={placeholder}
             readonly
+            tabindex="-1"
             data-services-input
         />
         <div class="bg-white text-[#090A0E] p-[13px] rounded-lg w-min ml-auto">
@@ -33,7 +34,7 @@ const { options, name, placeholder = "Select options..." } = Astro.props
     </div>
 
     <div
-        class="absolute w-full mt-1 max-h-60 overflow-y-auto border rounded-md bg-[#D0D2DE] hidden"
+        class="absolute w-full z-50 mt-1 max-h-60 overflow-y-auto bg-black rounded-md bg-gradient-to-br from-[#BBC6FF26] from-0% to-100% to-[#BBC6FF00] hidden"
         role="listbox"
         tabindex="-1"
         data-options-container
@@ -41,7 +42,7 @@ const { options, name, placeholder = "Select options..." } = Astro.props
         {
             options.map((option, index) => (
                 <div
-                    class="p-2 hover:bg-gray-100 cursor-pointer"
+                    class="p-2 text-white cursor-pointer"
                     role="option"
                     aria-selected="false"
                     data-option={option}
@@ -83,6 +84,10 @@ const { options, name, placeholder = "Select options..." } = Astro.props
             }
 
             this.selectedContainer.addEventListener("click", () => {
+                this.toggleDropdown()
+            })
+
+            this.selectedContainer.addEventListener("focus", (e) => {
                 this.toggleDropdown()
             })
 
@@ -161,6 +166,9 @@ const { options, name, placeholder = "Select options..." } = Astro.props
                     e.preventDefault()
                     this.moveActiveOption(-1)
                     break
+                case "Tab":
+                    this.closeDropdown()
+                    break
                 case "Escape":
                     this.closeDropdown()
                     break
@@ -188,7 +196,7 @@ const { options, name, placeholder = "Select options..." } = Astro.props
         }
 
         clearSelection() {
-			this.servicesInput.classList.remove("hidden")
+            this.servicesInput.classList.remove("hidden")
             const selectedItems =
                 this.selectedContainer.querySelectorAll("[data-value]")
             selectedItems.forEach((item) => item.remove())
@@ -210,13 +218,19 @@ const { options, name, placeholder = "Select options..." } = Astro.props
         setActiveOption(index) {
             const options =
                 this.optionsContainer.querySelectorAll("[data-option]")
-            options.forEach((opt) => opt.classList.remove("bg-gray-100"))
+            options.forEach((opt) => {
+                opt.classList.remove("bg-white")
+                opt.classList.add("text-white")
+                opt.classList.remove("text-[#000102]")
+            })
 
             this.activeIndex = index
 
             const activeOption = this.getOptionByIndex(index)
             if (activeOption) {
-                activeOption.classList.add("bg-gray-100")
+                activeOption.classList.add("bg-white")
+                activeOption.classList.remove("text-white")
+                activeOption.classList.add("text-[#000102]")
                 activeOption.scrollIntoView({ block: "nearest" })
             }
         }
