@@ -73,6 +73,7 @@ const { options, name, placeholder = "Select options..." } = Astro.props
             this.activeIndex = -1
             this.isOpen = false
             this.ignoreBlur = false
+            this.ignoreFocus = false
 
             this.init()
         }
@@ -84,11 +85,17 @@ const { options, name, placeholder = "Select options..." } = Astro.props
             }
 
             this.selectedContainer.addEventListener("click", () => {
-                this.selectedContainer.focus()
+                this.ignoreFocus = false
+                this.toggleDropdown()
             })
 
             this.selectedContainer.addEventListener("focus", (e) => {
-                this.toggleDropdown()
+                if (this.ignoreFocus) return
+                this.openDropdown()
+            })
+
+            this.selectedContainer.addEventListener("mousedown", (e) => {
+                this.ignoreFocus = true
             })
 
             this.optionsContainer.addEventListener("click", (e) => {
